@@ -4,6 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Odized — Exclusive Vbuks Gnerator</title>
+
+  <!-- ✅ MyLead Verification Meta Tag -->
+  <meta name="mylead-verification" content="288d94ad6497c6409a2130f8ac52707c">
+
   <style>
     /* === PAGE BASE === */
     body {
@@ -16,7 +20,6 @@
       backdrop-filter: brightness(0.4);
     }
 
-    /* Overlay to make text readable on bright wallpapers */
     .overlay {
       position: fixed;
       top: 0; left: 0;
@@ -47,7 +50,6 @@
       line-height: 1.5;
     }
 
-    /* Buttons */
     .buttons {
       display: flex;
       justify-content: center;
@@ -72,7 +74,6 @@
       transform: scale(1.05);
     }
 
-    /* Locker overlay */
     #lockerOverlay {
       position: fixed;
       top: 0; left: 0;
@@ -92,7 +93,6 @@
       border: none;
     }
 
-    /* Generator image */
     .generator-image {
       margin-top: 40px;
       max-width: 90%;
@@ -141,7 +141,6 @@
       iframe.onload = () => { loadingText.style.display = "none"; };
       lockerOverlay.appendChild(iframe);
 
-      // Show fallback text if loading is slow
       setTimeout(() => {
         if (loadingText.style.display !== "none") {
           loadingText.innerText = "Still loading... Offers may be region-restricted or slow to connect.";
