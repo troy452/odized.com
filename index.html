@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Odized — Exclusive Vbuks Gnerator</title>
+  <style>
+    /* === PAGE BASE === */
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: #fff;
+      text-align: center;
+      margin: 0;
+      background: url('wallpaper.jpg') no-repeat center center fixed;
+      background-size: cover;
+      backdrop-filter: brightness(0.4);
+    }
+
+    /* Overlay to make text readable on bright wallpapers */
+    .overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: -1;
+    }
+
+    header {
+      background: linear-gradient(90deg, rgba(106,90,205,0.9), rgba(157,78,221,0.9));
+      padding: 40px 0;
+      font-size: 2rem;
+      font-weight: bold;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+
+    h2 {
+      margin-top: 30px;
+      font-size: 1.5rem;
+      color: #fff;
+      text-shadow: 0 0 10px rgba(255,255,255,0.3);
+    }
+
+    p {
+      color: #ddd;
+      max-width: 600px;
+      margin: 0 auto 30px;
+      line-height: 1.5;
+    }
+
+    /* Buttons */
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      background: linear-gradient(90deg, #2b50ff, #5b7bff);
+      border: none;
+      color: white;
+      padding: 14px 30px;
+      font-size: 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.3s ease;
+      box-shadow: 0 0 15px rgba(91,123,255,0.4);
+    }
+
+    button:hover {
+      background: linear-gradient(90deg, #5b7bff, #7d93ff);
+      transform: scale(1.05);
+    }
+
+    /* Locker overlay */
+    #lockerOverlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      color: white;
+      flex-direction: column;
+    }
+
+    #lockerOverlay iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Generator image */
+    .generator-image {
+      margin-top: 40px;
+      max-width: 90%;
+      border-radius: 15px;
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
+    }
+
+    footer {
+      margin-top: 50px;
+      color: #aaa;
+      font-size: 0.9rem;
+      text-shadow: 0 0 5px rgba(0,0,0,0.4);
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+
+  <header>🎮 Odized — Exclusive Vbuks Gnerator</header>
+
+  <h2>🔓 Unlock Free Vbuks Gnerator</h2>
+  <p>Complete quick offers from our verified partners to access exclusive gaming content, discount codes, and digital rewards.</p>
+
+  <div class="buttons">
+    <button onclick="openLocker1()">⚡ Basic Access (1 Task)</button>
+    <button onclick="openLocker2()">🔥 Premium Access (3 Tasks)</button>
+  </div>
+
+  <!-- MyLead Locker Overlay -->
+  <div id="lockerOverlay">
+    <p id="loadingText">Loading secure access... please wait.</p>
+  </div>
+
+  <footer>
+    © 2025 Odized Rewards and offers provided via MyLead partner network.
+  </footer>
+
+  <script>
+    const lockerOverlay = document.getElementById("lockerOverlay");
+    const loadingText = document.getElementById("loadingText");
+
+    function openLocker(url) {
+      lockerOverlay.style.display = "flex";
+      const iframe = document.createElement("iframe");
+      iframe.src = url;
+      iframe.onload = () => { loadingText.style.display = "none"; };
+      lockerOverlay.appendChild(iframe);
+
+      // Show fallback text if loading is slow
+      setTimeout(() => {
+        if (loadingText.style.display !== "none") {
+          loadingText.innerText = "Still loading... Offers may be region-restricted or slow to connect.";
+        }
+      }, 15000);
+    }
+
+    function openLocker1() {
+      openLocker("https://bestlocker.eu/iframe/c0972446-bf09-11f0-b04d-c2a106037d45");
+    }
+
+    function openLocker2() {
+      openLocker("https://bestlocker.eu/iframe/75bf4fe6-bfa1-11f0-b382-c2a106037d45");
+    }
+  </script>
+</body>
+</html>
