@@ -3,13 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Odized — Exclusive Vbuks Gnerator</title>
+  <title>Odized — Exclusive Vbuks Generator</title>
 
   <!-- ✅ MyLead Verification Meta Tag -->
   <meta name="mylead-verification" content="288d94ad6497c6409a2130f8ac52707c">
 
   <style>
-    /* === PAGE BASE === */
     body {
       font-family: 'Poppins', sans-serif;
       color: #fff;
@@ -74,6 +73,7 @@
       transform: scale(1.05);
     }
 
+    /* Locker overlay */
     #lockerOverlay {
       position: fixed;
       top: 0; left: 0;
@@ -93,13 +93,6 @@
       border: none;
     }
 
-    .generator-image {
-      margin-top: 40px;
-      max-width: 90%;
-      border-radius: 15px;
-      box-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
-    }
-
     footer {
       margin-top: 50px;
       color: #aaa;
@@ -111,23 +104,23 @@
 <body>
   <div class="overlay"></div>
 
-  <header>🎮 Odized — Exclusive Vbuks Gnerator</header>
+  <header>🎮 Odized — Exclusive Vbuks Generator</header>
 
-  <h2>🔓 Unlock Free Vbuks Gnerator</h2>
-  <p>Complete quick offers from our verified partners to access exclusive gaming content, discount codes, and digital rewards.</p>
+  <h2>🔓 Unlock Free Vbuks Access</h2>
+  <p>Complete one or more quick offers from our verified partners to unlock premium gaming rewards and bonuses.</p>
 
   <div class="buttons">
     <button onclick="openLocker1()">⚡ Basic Access (1 Task)</button>
     <button onclick="openLocker2()">🔥 Premium Access (3 Tasks)</button>
   </div>
 
-  <!-- MyLead Locker Overlay -->
+  <!-- Locker Overlay -->
   <div id="lockerOverlay">
-    <p id="loadingText">Loading secure access... please wait.</p>
+    <p id="loadingText">Loading secure content... please wait.</p>
   </div>
 
   <footer>
-    © 2025 Odized Rewards and offers provided via MyLead partner network.
+    © 2025 Odized — Rewards and offers provided via MyLead partner network.
   </footer>
 
   <script>
@@ -139,6 +132,7 @@
       const iframe = document.createElement("iframe");
       iframe.src = url;
       iframe.onload = () => { loadingText.style.display = "none"; };
+      lockerOverlay.innerHTML = ""; // Clear previous content
       lockerOverlay.appendChild(iframe);
 
       setTimeout(() => {
@@ -148,12 +142,13 @@
       }, 15000);
     }
 
+    // ✅ Updated URLs from MyLead screenshots
     function openLocker1() {
-      openLocker("https://bestlocker.eu/iframe/c0972446-bf09-11f0-b04d-c2a106037d45");
+      openLocker("https://bestlocker.eu/iframe/b1920fea-bfab-11f0-bc32-c2a106037d45");
     }
 
     function openLocker2() {
-      openLocker("https://bestlocker.eu/iframe/75bf4fe6-bfa1-11f0-b382-c2a106037d45");
+      openLocker("https://bestlocker.eu/iframe/a3d7676a-bfab-11f0-abc9-c2a106037d45");
     }
   </script>
 </body>
