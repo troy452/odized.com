@@ -1,0 +1,347 @@
+/* -----------------------------------------
+   GLOBAL RESET
+----------------------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* -----------------------------------------
+   DEFAULT THEME VARIABLES
+----------------------------------------- */
+:root {
+  --bg: #0d0f16;
+  --panel: #1a1f2e;
+  --text: #ffffff;
+  --muted: #a3acc7;
+  --accent: #4da3ff;
+  --border: #2b3145;
+}
+
+/* -----------------------------------------
+   THEME: ROBLOX
+----------------------------------------- */
+.theme-roblox {
+  --accent: #ff3333;
+  --panel: #171717;
+  --bg: #090909;
+}
+
+/* -----------------------------------------
+   THEME: FORTNITE
+----------------------------------------- */
+.theme-fortnite {
+  --accent: #8c39ff;
+  --panel: #111326;
+  --bg: #050612;
+}
+
+/* -----------------------------------------
+   BODY
+----------------------------------------- */
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* -----------------------------------------
+   HEADER
+----------------------------------------- */
+.header {
+  background: var(--panel);
+  padding: 14px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  font-size: 1.7rem;
+  font-weight: bold;
+  color: var(--accent);
+}
+
+/* Hamburger */
+#hamburger {
+  display: none;
+  font-size: 24px;
+  background: none;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+/* Desktop nav */
+.nav a {
+  color: var(--muted);
+  margin-left: 18px;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.nav a:hover,
+.nav a.active {
+  color: var(--accent);
+}
+
+/* -----------------------------------------
+   MOBILE NAV
+----------------------------------------- */
+@media (max-width: 860px) {
+  #hamburger { display: block; }
+
+  .nav {
+    display: none;
+    flex-direction: column;
+    background: var(--panel);
+    padding: 15px 0;
+    position: absolute;
+    top: 65px;
+    left: 0;
+    right: 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav a {
+    padding: 12px 20px;
+    border-bottom: 1px solid #111a;
+  }
+}
+
+/* -----------------------------------------
+   BOTTOM MOBILE NAV
+----------------------------------------- */
+.bottom-nav {
+  display: none;
+}
+
+@media (max-width: 860px) {
+  .bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    background: var(--panel);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 12px 0;
+    border-top: 1px solid var(--border);
+    z-index: 50;
+  }
+
+  .bottom-nav a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+}
+
+/* -----------------------------------------
+   HERO SECTION (HOME PAGE)
+----------------------------------------- */
+.hero {
+  text-align: center;
+  padding: 80px 20px;
+  background: linear-gradient(135deg, #20304a, #121826);
+}
+
+.hero h1 {
+  font-size: 3rem;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.hero p {
+  color: var(--muted);
+  font-size: 1.1rem;
+}
+
+/* -----------------------------------------
+   GENERIC GRID / CARDS
+----------------------------------------- */
+.grid,
+.news-list,
+.forum-list,
+.meme-grid,
+.profile-grid,
+.giveaway-grid {
+  max-width: 1100px;
+  margin: 35px auto;
+  padding: 0 20px;
+  display: grid;
+  gap: 20px;
+}
+
+/* Generic card wrapper */
+.card,
+.news-item,
+.forum-item,
+.meme-card,
+.profile-card,
+.giveaway-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 22px;
+  transition: 0.25s;
+}
+
+/* Hover effect */
+.card:hover,
+.news-item:hover,
+.forum-item:hover,
+.meme-card:hover,
+.profile-card:hover,
+.giveaway-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px #0005;
+}
+
+/* Common card title */
+.card h2,
+.news-item h2,
+.forum-item h2,
+.meme-card h2,
+.profile-card h2,
+.giveaway-card h2 {
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+/* -----------------------------------------
+   GRID LAYOUTS
+----------------------------------------- */
+.grid {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.meme-grid {
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.profile-grid {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.giveaway-grid {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+/* -----------------------------------------
+   MEMES
+----------------------------------------- */
+.meme-card img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+/* -----------------------------------------
+   PROFILES
+----------------------------------------- */
+.profile-card {
+  text-align: center;
+}
+
+.profile-card img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  margin-bottom: 12px;
+}
+
+.rank {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 6px 10px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 6px;
+  font-size: 0.85rem;
+}
+
+/* -----------------------------------------
+   PAGE HEADER
+----------------------------------------- */
+.page-header {
+  text-align: center;
+  padding: 50px 20px;
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+}
+
+.page-header h1 {
+  font-size: 2.1rem;
+  color: var(--accent);
+}
+
+.page-header p {
+  margin-top: 6px;
+  color: var(--muted);
+}
+
+/* -----------------------------------------
+   BUTTONS
+----------------------------------------- */
+.btn {
+  display: inline-block;
+  padding: 10px 14px;
+  background: var(--accent);
+  border: none;
+  border-radius: 6px;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+  margin-top: 12px;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.btn:hover {
+  opacity: 0.8;
+}
+
+/* -----------------------------------------
+   FOOTER
+----------------------------------------- */
+.footer {
+  text-align: center;
+  padding: 25px;
+  margin-top: 40px;
+  border-top: 1px solid var(--border);
+  background: #111827;
+  color: var(--muted);
+}
+
+/* -----------------------------------------
+   ANIMATIONS
+----------------------------------------- */
+.fade-in {
+  animation: fadeIn 0.4s ease both;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* -----------------------------------------
+   DATE LABELS
+----------------------------------------- */
+.date {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}

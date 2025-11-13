@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Thank You — Gaming Community Hub</title>
+  <meta name="description" content="Thank you for your submission on the Gaming Community Hub." />
+  <link rel="icon" href="assets/favicon.ico" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="header" role="banner">
+    <div class="header-left">
+      <button id="hamburger" aria-label="Open navigation">☰</button>
+      <div class="logo">Gaming Hub</div>
+    </div>
+
+    <nav class="nav" id="mainNav">
+      <a href="index.html">Home</a>
+      <a href="news.html">News</a>
+      <a href="forums.html">Forums</a>
+      <a href="memes.html">Memes</a>
+      <a href="profiles.html">Profiles</a>
+      <a href="giveaways.html">Giveaways</a>
+    </nav>
+
+    <div class="header-right">
+      <div class="theme-switch">
+        <select id="themeSelect">
+          <option value="">Default</option>
+          <option value="theme-roblox">Roblox</option>
+          <option value="theme-fortnite">Fortnite</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <!-- MOBILE NAV -->
+  <nav class="bottom-nav">
+    <a href="index.html">Home</a>
+    <a href="forums.html">Forums</a>
+    <a href="memes.html">Memes</a>
+    <a href="profiles.html">Profile</a>
+  </nav>
+
+  <!-- THANK YOU SECTION -->
+  <section class="page-header fade-in">
+    <h1>🎉 Thank You!</h1>
+    <p>Your action was completed successfully.</p>
+  </section>
+
+  <main style="max-width: 700px; margin: 40px auto; padding: 0 20px;">
+    <div class="card fade-in" style="text-align:center; padding:35px;">
+
+      <h2 style="margin-bottom:10px; color:var(--accent);">You're all set!</h2>
+
+      <p style="color:var(--muted); margin-bottom:22px;">
+        Thank you for participating!  
+        If this was a giveaway entry, your submission has been recorded.  
+        If you came from another action, everything went smoothly.
+      </p>
+
+      <a href="index.html" class="btn">Return to Home</a>
+
+      <!-- OPTIONAL Auto redirect notice -->
+      <p style="margin-top:16px; font-size:0.85rem; color:var(--muted);">
+        You will be redirected in <span id="countdown">5</span> seconds…
+      </p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    © 2025 Gaming Community Hub — Thank you page.
+  </footer>
+
+  <script src="script.js" defer></script>
+
+  <!-- Redirect countdown -->
+  <script>
+    let seconds = 5;
+    const cd = document.getElementById("countdown");
+
+    const timer = setInterval(() => {
+      seconds--;
+      cd.textContent = seconds;
+
+      if (seconds <= 0) {
+        clearInterval(timer);
+        window.location.href = "index.html";
+      }
+    }, 1000);
+  </script>
+
+</body>
+</html>
