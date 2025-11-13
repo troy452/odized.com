@@ -1,11 +1,22 @@
-/* ---------------------------------------
-   OGADS LOCKER CONFIG
---------------------------------------- */
+/* ============================================================
+   GLOBAL CONFIG (API Keys + OGAds Locker)
+============================================================ */
+
+// Your REAL RapidAPI key (you provided it)
+const GAME_NEWS_API_KEY = "d94adf1b6cmsh627c207e173a3e0p129a7fjsn20c9d926c0c1";
+
+// OGAds Content Locker URL
 const OGADS_LOCKER_URL = "https://redirectapps.online/cl/i/j76wev";
 
-/* ---------------------------------------
+// Cache TTL
+const CONFIG = {
+  CACHE_TTL_MINUTES: 15,
+};
+
+
+/* ============================================================
    MOBILE NAV
---------------------------------------- */
+============================================================ */
 const hamburger = document.getElementById("hamburger");
 const mainNav = document.getElementById("mainNav");
 
@@ -15,7 +26,6 @@ if (hamburger) {
   });
 }
 
-/* Close mobile menu when clicking a link */
 document.addEventListener("DOMContentLoaded", () => {
   if (mainNav) {
     mainNav.querySelectorAll("a").forEach(link => {
@@ -28,9 +38,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-/* ---------------------------------------
+
+/* ============================================================
    THEME SWITCHER
---------------------------------------- */
+============================================================ */
 const themeSelect = document.getElementById("themeSelect");
 
 function applyTheme(theme) {
@@ -40,9 +51,9 @@ function applyTheme(theme) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const savedTheme = localStorage.getItem("siteTheme") || "";
-  applyTheme(savedTheme);
-  if (themeSelect) themeSelect.value = savedTheme;
+  const saved = localStorage.getItem("siteTheme") || "";
+  applyTheme(saved);
+  if (themeSelect) themeSelect.value = saved;
 
   if (themeSelect) {
     themeSelect.addEventListener("change", e => {
@@ -51,14 +62,15 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-/* ---------------------------------------
-   OGADS LOCKER HANDLER
---------------------------------------- */
+
+/* ============================================================
+   OGADS LOCKER REDIRECT
+============================================================ */
 function openLocker() {
   window.location.href = OGADS_LOCKER_URL;
 }
 
-/* Automatically attach locker to all giveaway buttons */
+// Auto-apply locker to giveaway buttons
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".btn").forEach(btn => {
     if (btn.textContent.includes("Enter Giveaway")) {
@@ -67,132 +79,150 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-/* ---------------------------------------
-   CACHING SYSTEM
---------------------------------------- */
-const CONFIG = {
-  CACHE_TTL_MINUTES: 15,
-  FORTNITE_API_KEY: "",
-  RAWG_API_KEY: "",
-  PANDASCORE_API_KEY: ""
-};
 
+/* ============================================================
+   CACHE SYSTEM
+============================================================ */
 function cacheSet(key, valueObj) {
   const payload = { ts: Date.now(), data: valueObj };
   localStorage.setItem(key, JSON.stringify(payload));
 }
 
-function cacheGet(key, maxAgeMinutes = CONFIG.CACHE_TTL_MINUTES) {
+function cacheGet(key, maxAgeMin = CONFIG.CACHE_TTL_MINUTES) {
   try {
     const raw = localStorage.getItem(key);
     if (!raw) return null;
+
     const payload = JSON.parse(raw);
     const age = (Date.now() - payload.ts) / 1000 / 60;
-    if (age > maxAgeMinutes) return null;
+
+    if (age > maxAgeMin) return null;
     return payload.data;
+
   } catch {
     return null;
   }
 }
 
-/* ---------------------------------------
+
+/* ============================================================
    FETCH HELPERS
---------------------------------------- */
+============================================================ */
 async function fetchWithTimeout(url, opts = {}, ms = 9000) {
   const controller = new AbortController();
-  const id = setTimeout(() => controller.abort(), ms);
-  try {
-    const res = await fetch(url, { ...opts, signal: controller.signal });
-    clearTimeout(id);
-    return res;
-  } catch (e) {
-    clearTimeout(id);
-    throw e;
-  }
+  const timer = setTimeout(() => controller.abort(), ms);
+
+  const res = await fetch(url, { ...opts, signal: controller.signal });
+  clearTimeout(timer);
+
+  if (!res.ok) throw new Error("HTTP " + res.status);
+  return res;
 }
 
 async function fetchReddit(sub, limit = 8) {
   const url = `https://www.reddit.com/r/${sub}/hot.json?limit=${limit}`;
   const res = await fetchWithTimeout(url);
-  const data = await res.json();
-  return data.data.children.map(p => p.data);
+  const json = await res.json();
+  return json.data.children.map(p => p.data);
 }
 
-async function fetchRobloxBlog(limit = 6) {
-  const url = `https://blog.roblox.com/wp-json/wp/v2/posts?per_page=${limit}`;
-  const res = await fetchWithTimeout(url);
-  return res.json();
-}
 
-/* ---------------------------------------
-   ELEMENT HELPER
---------------------------------------- */
+/* ============================================================
+   DOM HELPER
+============================================================ */
 function el(tag, attrs = {}, children = []) {
   const node = document.createElement(tag);
-  for (const k in attrs) {
-    if (k === "class") node.className = attrs[k];
-    else if (k === "html") node.innerHTML = attrs[k];
-    else node.setAttribute(k, attrs[k]);
+  for (const key in attrs) {
+    if (key === "class") node.className = attrs[key];
+    else if (key === "html") node.innerHTML = attrs[key];
+    else node.setAttribute(key, attrs[key]);
   }
-  (Array.isArray(children) ? children : [children]).forEach(c => {
-    if (typeof c === "string") node.appendChild(document.createTextNode(c));
-    else if (c) node.appendChild(c);
+
+  (Array.isArray(children) ? children : [children]).forEach(child => {
+    if (typeof child === "string") node.appendChild(document.createTextNode(child));
+    else if (child) node.appendChild(child);
   });
+
   return node;
 }
 
-function formatDate(d) {
-  try {
-    return new Date(d).toLocaleString();
-  } catch {
-    return d;
-  }
-}
 
-/* ---------------------------------------
-   PAGE RENDERERS
---------------------------------------- */
+/* ============================================================
+   NEWS API — RAPIDAPI INTEGRATION
+============================================================ */
+
+// Fetch gaming news from RapidAPI
 async function renderNewsPage() {
   const container = document.querySelector(".news-list");
   if (!container) return;
-  container.innerHTML = "Loading news...";
+
+  container.innerHTML = "Loading gaming news…";
+
+  const API_URL = "https://games-news-api.p.rapidapi.com/news";
 
   try {
-    const [roblox, gaming] = await Promise.all([
-      fetchRobloxBlog(6),
-      fetchReddit("gaming", 8)
-    ]);
+    const cached = cacheGet("all_gaming_news");
+    if (cached) return renderNewsResults(cached, container);
 
-    container.innerHTML = "";
-
-    roblox.forEach(post => {
-      container.appendChild(
-        el("div", { class: "news-item" }, [
-          el("h2", {}, post.title.rendered),
-          el("p", {}, post.excerpt.rendered.replace(/<[^>]+>/g, "").slice(0, 180)),
-          el("div", { class: "date" }, formatDate(post.date))
-        ])
-      );
+    const res = await fetch(API_URL, {
+      method: "GET",
+      headers: {
+        "x-rapidapi-host": "games-news-api.p.rapidapi.com",
+        "x-rapidapi-key": GAME_NEWS_API_KEY
+      }
     });
 
-    gaming.forEach(p => {
-      container.appendChild(
-        el("div", { class: "news-item" }, [
-          el("h2", {}, p.title),
-          el("p", {}, p.selftext.slice(0, 150)),
-          el("a", { href: "https://reddit.com" + p.permalink, target: "_blank" }, "Read on Reddit")
-        ])
-      );
-    });
-  } catch (e) {
+    if (!res.ok) throw new Error("News API error");
+
+    const data = await res.json();
+    cacheSet("all_gaming_news", data);
+
+    renderNewsResults(data, container);
+
+  } catch (err) {
     container.innerHTML = "Failed to load news.";
+    console.error(err);
   }
 }
 
+// Render news card list
+function renderNewsResults(data, container) {
+  container.innerHTML = "";
+
+  if (!Array.isArray(data) || data.length === 0) {
+    container.innerHTML = "<div>No news available.</div>";
+    return;
+  }
+
+  data.slice(0, 12).forEach(article => {
+    const card = document.createElement("div");
+    card.className = "news-item";
+
+    const img = article.image_url
+      ? `<img src="${article.image_url}" style="width:100%;border-radius:8px;margin-bottom:10px;">`
+      : "";
+
+    card.innerHTML = `
+      ${img}
+      <h2>${article.title}</h2>
+      <p>${article.description ? article.description.slice(0, 200) + "…" : ""}</p>
+      <a href="${article.url}" target="_blank">Read full article</a>
+      <div class="date">${new Date(article.published).toLocaleString()}</div>
+    `;
+
+    container.appendChild(card);
+  });
+}
+
+
+/* ============================================================
+   MEMES PAGE
+============================================================ */
 async function renderMemesPage() {
   const container = document.querySelector(".meme-grid");
   if (!container) return;
-  container.innerHTML = "Loading memes...";
+
+  container.innerHTML = "Loading memes…";
 
   try {
     const memes = await fetchReddit("gamingmemes", 12);
@@ -200,6 +230,7 @@ async function renderMemesPage() {
 
     memes.forEach(m => {
       const img = m.url_overridden_by_dest || m.thumbnail;
+
       container.appendChild(
         el("div", { class: "meme-card" }, [
           img ? el("img", { src: img }) : "",
@@ -207,23 +238,30 @@ async function renderMemesPage() {
         ])
       );
     });
+
   } catch {
     container.innerHTML = "Failed to load memes.";
   }
 }
 
+
+/* ============================================================
+   PROFILES PAGE
+============================================================ */
 async function renderProfilesPage() {
-  const c = document.querySelector(".profile-grid");
-  if (!c) return;
-  c.innerHTML = "Loading profiles...";
+  const grid = document.querySelector(".profile-grid");
+  if (!grid) return;
+
+  grid.innerHTML = "Loading profiles…";
 
   try {
     const res = await fetch("https://randomuser.me/api/?results=12");
-    const json = await res.json();
-    c.innerHTML = "";
+    const data = await res.json();
 
-    json.results.forEach(u => {
-      c.appendChild(
+    grid.innerHTML = "";
+
+    data.results.forEach(u => {
+      grid.appendChild(
         el("div", { class: "profile-card" }, [
           el("img", { src: u.picture.large }),
           el("h2", {}, `${u.name.first} ${u.name.last}`),
@@ -231,39 +269,72 @@ async function renderProfilesPage() {
         ])
       );
     });
+
   } catch {
-    c.innerHTML = "Failed to load profiles.";
+    grid.innerHTML = "Failed to load profiles.";
   }
 }
 
-async function renderGiveawaysPage() {
-  const c = document.querySelector(".giveaway-grid");
-  if (!c) return;
 
-  const items = [
-    { title: "$20 Roblox Gift Card", desc: "Win a Roblox digital gift card." },
-    { title: "1,000 V-Bucks", desc: "Fortnite V-Bucks for skins & passes." },
-    { title: "Gaming Headset", desc: "Premium audio gaming headset." }
+/* ============================================================
+   FORUMS PAGE
+============================================================ */
+async function renderForumsPage() {
+  const grid = document.querySelector(".forum-list");
+  if (!grid) return;
+
+  const categories = [
+    { title: "Roblox Discussions", desc: "Avatars, builds, updates." },
+    { title: "Fortnite Talk", desc: "Skins, drops, events." },
+    { title: "Mobile Games", desc: "PUBG, Free Fire, CODM." },
+    { title: "General Gaming", desc: "All platforms & genres." }
   ];
 
-  c.innerHTML = "";
-  items.forEach(item =>
-    c.appendChild(
+  categories.forEach(c => {
+    grid.appendChild(
+      el("div", { class: "forum-item" }, [
+        el("h2", {}, c.title),
+        el("p", {}, c.desc),
+        el("div", { class: "meta" }, `${Math.floor(Math.random()*1500)} posts`),
+        el("a", { class: "btn", href: "#" }, "Enter")
+      ])
+    );
+  });
+}
+
+
+/* ============================================================
+   GIVEAWAYS PAGE
+============================================================ */
+async function renderGiveawaysPage() {
+  const grid = document.querySelector(".giveaway-grid");
+  if (!grid) return;
+
+  const items = [
+    { title: "$20 Roblox Gift Card", desc: "Win a Roblox gift card." },
+    { title: "1,000 V-Bucks", desc: "Fortnite currency prize." },
+    { title: "Gaming Headset", desc: "Pro gaming headset." }
+  ];
+
+  items.forEach(item => {
+    grid.appendChild(
       el("div", { class: "giveaway-card" }, [
         el("h2", {}, item.title),
         el("p", {}, item.desc),
         el("button", { class: "btn", onclick: "openLocker()" }, "Enter Giveaway")
       ])
-    )
-  );
+    );
+  });
 }
 
-/* ---------------------------------------
-   BOOT SYSTEM
---------------------------------------- */
+
+/* ============================================================
+   PAGE DETECTOR & BOOT
+============================================================ */
 document.addEventListener("DOMContentLoaded", () => {
   if (document.querySelector(".news-list")) renderNewsPage();
   if (document.querySelector(".meme-grid")) renderMemesPage();
   if (document.querySelector(".profile-grid")) renderProfilesPage();
+  if (document.querySelector(".forum-list")) renderForumsPage();
   if (document.querySelector(".giveaway-grid")) renderGiveawaysPage();
 });
