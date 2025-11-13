@@ -9,7 +9,7 @@
 }
 
 /* ============================================================
-   BACKGROUND (Your wallpaper.jpeg)
+   BACKGROUND WALLPAPER
 ============================================================ */
 body {
   background: url("assets/wallpaper.jpeg") no-repeat center center fixed;
@@ -19,7 +19,7 @@ body {
   position: relative;
 }
 
-/* Dark overlay + clarity */
+/* dark overlay */
 body::before {
   content: "";
   position: fixed;
@@ -55,7 +55,7 @@ body::before {
 ============================================================ */
 .header {
   background: var(--panel);
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(10px);
   padding: 12px 20px;
   display: flex;
   justify-content: space-between;
@@ -79,12 +79,13 @@ body::before {
   text-shadow: 0 0 10px var(--accent);
 }
 
+/* Hamburger (mobile) */
 #hamburger {
   display: none;
-  font-size: 22px;
+  font-size: 24px;
   background: none;
-  color: white;
   border: none;
+  color: white;
 }
 
 /* NAV LINKS */
@@ -105,24 +106,20 @@ body::before {
    MOBILE NAV
 ============================================================ */
 @media (max-width: 860px) {
-
   #hamburger { display: block; }
 
   .nav {
     display: none;
     flex-direction: column;
-    background: var(--panel);
-    padding: 15px;
     position: absolute;
-    left: 0;
-    right: 0;
-    top: 60px;
+    left: 0; right: 0; top: 60px;
+    padding: 15px;
+    background: var(--panel);
     border-bottom: 1px solid rgba(255,255,255,0.12);
   }
 
   .nav a {
-    margin-left: 0;
-    padding: 10px;
+    margin: 10px 0;
     font-size: 1.1rem;
   }
 }
@@ -135,14 +132,11 @@ body::before {
   .bottom-nav {
     display: flex;
     justify-content: space-around;
-    background: var(--panel);
-    padding: 10px 0;
-    border-top: 1px solid rgba(255,255,255,0.12);
     position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 40;
+    bottom: 0; left: 0; right: 0;
+    padding: 10px;
+    background: var(--panel);
+    border-top: 1px solid rgba(255,255,255,0.12);
   }
 
   .bottom-nav a {
@@ -152,38 +146,86 @@ body::before {
 }
 
 /* ============================================================
-   GIVEAWAYS PAGE FIXED LAYOUT
+   PAGE HEADER (Centered)
 ============================================================ */
+.page-header {
+  width: 100%;
+  max-width: 1100px;
+  margin: 30px auto 10px;
+  text-align: center;
+  padding: 20px;
+}
 
-.giveaway-page-wrapper {
+.page-header h1 {
+  font-size: 2.3rem;
+  color: var(--accent);
+  text-shadow: 0 0 10px var(--accent);
+  margin-bottom: 6px;
+}
+
+.page-header p {
+  color: #dcdcdc;
+  opacity: 0.9;
+}
+
+/* ============================================================
+   GIVEAWAYS TOP BANNER — FIXED CENTERING
+============================================================ */
+.giveaway-top-wrapper {
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin: 20px 0;
 }
 
+.giveaway-top {
+  width: 100%;
+  max-width: 900px;
+  background: var(--panel);
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  text-align: center;
+}
+
+.giveaway-top h1,
+.giveaway-top p {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.giveaway-top .btn {
+  display: block;
+  margin: 10px auto 0;
+}
+
+/* ============================================================
+   GIVEAWAY GRID (cards)
+============================================================ */
 .giveaway-grid {
   width: 100%;
-  max-width: 1200px;          /* Center container */
+  max-width: 1200px;
+  margin: 10px auto 40px;
   padding: 0 20px;
 
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 25px;
 
-  justify-items: center;       /* Center each card */
+  justify-items: center;
 }
 
 .giveaway-card {
   background: var(--panel);
   border-radius: 14px;
-  border: 1px solid rgba(255,255,255,0.15);
-  padding: 25px;
   width: 100%;
-  max-width: 350px;            /* Prevent extra wide cards */
+  max-width: 350px;
+  padding: 25px;
+  border: 1px solid rgba(255,255,255,0.15);
   text-align: center;
-  backdrop-filter: blur(10px);
   transition: 0.25s;
+  backdrop-filter: blur(10px);
 }
 
 .giveaway-card:hover {
@@ -192,14 +234,13 @@ body::before {
 }
 
 .giveaway-card h2 {
-  font-size: 1.4rem;
   color: var(--accent);
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .giveaway-card p {
-  color: #d8d8d8;
-  margin-bottom: 14px;
+  color: #d6d6d6;
+  margin-bottom: 12px;
 }
 
 .giveaway-card .btn {
@@ -207,51 +248,50 @@ body::before {
   margin: 0 auto;
 }
 
-.loading-card h2, 
-.loading-card p {
-  opacity: 0.7;
-}
-
 /* ============================================================
    BUTTONS
 ============================================================ */
 .btn {
   background: var(--accent);
+  color: white;
   padding: 12px 20px;
   border-radius: 8px;
   border: none;
-  color: white;
   cursor: pointer;
   transition: 0.25s;
 }
+
 .btn:hover {
   opacity: 0.8;
 }
 
 /* ============================================================
-   HERO SECTION
+   HOME HERO
 ============================================================ */
 .hero {
+  width: 100%;
+  max-width: 1100px;
+  margin: 30px auto;
   text-align: center;
-  padding: 60px 20px;
+  padding: 40px 20px;
 }
 
 .hero h1 {
   font-size: 2.6rem;
   color: var(--accent);
-  margin-bottom: 10px;
   text-shadow: 0 0 10px var(--accent);
 }
 
 .hero p {
-  color: #e0e0e0;
-  opacity: 0.9;
+  margin-top: 10px;
+  color: #dddddd;
 }
 
 /* ============================================================
-   GRID LAYOUT
+   GENERIC GRID (Home, etc.)
 ============================================================ */
 .grid {
+  width: 100%;
   max-width: 1100px;
   margin: 40px auto;
   padding: 0 20px;
@@ -265,9 +305,9 @@ body::before {
   background: var(--panel);
   padding: 25px;
   border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.12);
   text-decoration: none;
   color: white;
+  border: 1px solid rgba(255,255,255,0.12);
   backdrop-filter: blur(6px);
   transition: 0.25s;
 }
@@ -278,12 +318,8 @@ body::before {
 }
 
 .card h2 {
-  margin-bottom: 8px;
   color: var(--accent);
-}
-
-.card p {
-  opacity: 0.9;
+  margin-bottom: 8px;
 }
 
 /* ============================================================
@@ -292,9 +328,9 @@ body::before {
 .footer {
   text-align: center;
   padding: 20px;
-  margin-top: 40px;
   background: rgba(0,0,0,0.45);
-  border-top: 1px solid rgba(255,255,255,0.1);
+  border-top: 1px solid rgba(255,255,255,0.12);
+  margin-top: 40px;
   color: var(--muted);
 }
 
@@ -307,5 +343,5 @@ body::before {
 
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  to   { opacity: 1; transform: translateY(0); }
 }
