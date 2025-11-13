@@ -152,46 +152,64 @@ body::before {
 }
 
 /* ============================================================
-   TOP GIVEAWAY BANNER (Centered)
+   GIVEAWAYS PAGE FIXED LAYOUT
 ============================================================ */
-.giveaway-banner-wrapper {
+
+.giveaway-page-wrapper {
   width: 100%;
   display: flex;
   justify-content: center;
   margin-top: 20px;
 }
 
-.giveaway-banner {
-  text-align: center;
-  background: rgba(0,0,0,0.55);
-  border: 1px solid rgba(255,255,255,0.15);
-  padding: 22px 28px;
-  border-radius: 14px;
-  max-width: 900px;
-  width: 90%;
-  backdrop-filter: blur(14px);
+.giveaway-grid {
+  width: 100%;
+  max-width: 1200px;          /* Center container */
+  padding: 0 20px;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+
+  justify-items: center;       /* Center each card */
 }
 
-.giveaway-banner h2 {
-  font-size: 1.8rem;
+.giveaway-card {
+  background: var(--panel);
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 25px;
+  width: 100%;
+  max-width: 350px;            /* Prevent extra wide cards */
+  text-align: center;
+  backdrop-filter: blur(10px);
+  transition: 0.25s;
+}
+
+.giveaway-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 20px var(--accent);
+}
+
+.giveaway-card h2 {
+  font-size: 1.4rem;
   color: var(--accent);
   margin-bottom: 10px;
-  text-shadow: 0 0 10px var(--accent);
 }
 
-.giveaway-banner p {
-  color: #eaeaea;
-  opacity: 0.9;
+.giveaway-card p {
+  color: #d8d8d8;
+  margin-bottom: 14px;
 }
 
-.giveaway-banner .btn {
-  margin-top: 15px;
+.giveaway-card .btn {
+  width: 150px;
+  margin: 0 auto;
 }
 
-.timer {
-  margin-top: 10px;
-  color: var(--muted);
-  font-size: 0.9rem;
+.loading-card h2, 
+.loading-card p {
+  opacity: 0.7;
 }
 
 /* ============================================================
