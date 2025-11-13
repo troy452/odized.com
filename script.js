@@ -1,17 +1,12 @@
 /* ============================================================
-   GLOBAL CONFIG (API Keys + OGAds Locker)
+   CONFIG + GLOBAL SETTINGS
 ============================================================ */
 
-// Your REAL RapidAPI key (you provided it)
-const GAME_NEWS_API_KEY = "d94adf1b6cmsh627c207e173a3e0p129a7fjsn20c9d926c0c1";
-
-// OGAds Content Locker URL
+// OGAds Locker URL
 const OGADS_LOCKER_URL = "https://redirectapps.online/cl/i/j76wev";
 
-// Cache TTL
-const CONFIG = {
-  CACHE_TTL_MINUTES: 15,
-};
+// Cache duration
+const CACHE_TTL = 15; // minutes
 
 
 /* ============================================================
@@ -22,7 +17,7 @@ const mainNav = document.getElementById("mainNav");
 
 if (hamburger) {
   hamburger.addEventListener("click", () => {
-    mainNav.style.display = mainNav.style.display === "flex" ? "none" : "flex";
+    mainNav.style.display = (mainNav.style.display === "flex" ? "none" : "flex");
   });
 }
 
@@ -40,37 +35,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 /* ============================================================
-   THEME SWITCHER
+   THEME SWITCHER (fixed)
 ============================================================ */
-const themeSelect = document.getElementById("themeSelect");
-
-function applyTheme(theme) {
-  document.documentElement.classList.remove("theme-roblox", "theme-fortnite");
-  if (theme) document.documentElement.classList.add(theme);
-  localStorage.setItem("siteTheme", theme);
-}
-
 document.addEventListener("DOMContentLoaded", () => {
-  const saved = localStorage.getItem("siteTheme") || "";
-  applyTheme(saved);
-  if (themeSelect) themeSelect.value = saved;
+  const themeSelect = document.getElementById("themeSelect");
+  const savedTheme = localStorage.getItem("siteTheme") || "";
+
+  if (savedTheme) {
+    document.documentElement.classList.add(savedTheme);
+  }
 
   if (themeSelect) {
-    themeSelect.addEventListener("change", e => {
-      applyTheme(e.target.value);
+    themeSelect.value = savedTheme;
+
+    themeSelect.addEventListener("change", () => {
+      const theme = themeSelect.value;
+      document.documentElement.classList.remove("theme-roblox", "theme-fortnite");
+      if (theme) document.documentElement.classList.add(theme);
+      localStorage.setItem("siteTheme", theme);
     });
   }
 });
 
 
 /* ============================================================
-   OGADS LOCKER REDIRECT
+   OGADS CONTENT LOCKER
 ============================================================ */
 function openLocker() {
   window.location.href = OGADS_LOCKER_URL;
 }
 
-// Auto-apply locker to giveaway buttons
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".btn").forEach(btn => {
     if (btn.textContent.includes("Enter Giveaway")) {
@@ -81,23 +75,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 /* ============================================================
-   CACHE SYSTEM
+   CACHING SYSTEM
 ============================================================ */
-function cacheSet(key, valueObj) {
-  const payload = { ts: Date.now(), data: valueObj };
+function cacheSet(key, data) {
+  const payload = { ts: Date.now(), data };
   localStorage.setItem(key, JSON.stringify(payload));
 }
 
-function cacheGet(key, maxAgeMin = CONFIG.CACHE_TTL_MINUTES) {
+function cacheGet(key, ttlMin = CACHE_TTL) {
   try {
     const raw = localStorage.getItem(key);
     if (!raw) return null;
 
-    const payload = JSON.parse(raw);
-    const age = (Date.now() - payload.ts) / 1000 / 60;
+    const parsed = JSON.parse(raw);
+    const age = (Date.now() - parsed.ts) / 1000 / 60;
 
-    if (age > maxAgeMin) return null;
-    return payload.data;
+    if (age > ttlMin) return null;
+    return parsed.data;
 
   } catch {
     return null;
@@ -106,109 +100,76 @@ function cacheGet(key, maxAgeMin = CONFIG.CACHE_TTL_MINUTES) {
 
 
 /* ============================================================
-   FETCH HELPERS
-============================================================ */
-async function fetchWithTimeout(url, opts = {}, ms = 9000) {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), ms);
-
-  const res = await fetch(url, { ...opts, signal: controller.signal });
-  clearTimeout(timer);
-
-  if (!res.ok) throw new Error("HTTP " + res.status);
-  return res;
-}
-
-async function fetchReddit(sub, limit = 8) {
-  const url = `https://www.reddit.com/r/${sub}/hot.json?limit=${limit}`;
-  const res = await fetchWithTimeout(url);
-  const json = await res.json();
-  return json.data.children.map(p => p.data);
-}
-
-
-/* ============================================================
-   DOM HELPER
+   HELPER FUNCTION
 ============================================================ */
 function el(tag, attrs = {}, children = []) {
-  const node = document.createElement(tag);
-  for (const key in attrs) {
-    if (key === "class") node.className = attrs[key];
-    else if (key === "html") node.innerHTML = attrs[key];
-    else node.setAttribute(key, attrs[key]);
+  const n = document.createElement(tag);
+  for (const a in attrs) {
+    if (a === "class") n.className = attrs[a];
+    else if (a === "html") n.innerHTML = attrs[a];
+    else n.setAttribute(a, attrs[a]);
   }
-
-  (Array.isArray(children) ? children : [children]).forEach(child => {
-    if (typeof child === "string") node.appendChild(document.createTextNode(child));
-    else if (child) node.appendChild(child);
-  });
-
-  return node;
+  (Array.isArray(children) ? children : [children]).forEach(c =>
+    typeof c === "string" ? n.appendChild(document.createTextNode(c)) : c && n.appendChild(c)
+  );
+  return n;
 }
 
 
 /* ============================================================
-   NEWS API — RAPIDAPI INTEGRATION
+   GOOGLE NEWS RSS FETCHER
 ============================================================ */
 
-// Fetch gaming news from RapidAPI
+// Google News (Gaming) RSS → JSON
+const GOOGLE_NEWS_URL =
+  "https://api.rss2json.com/v1/api.json?rss_url=https://news.google.com/rss/search?q=gaming&hl=en-US&gl=US&ceid=US:en";
+
 async function renderNewsPage() {
   const container = document.querySelector(".news-list");
   if (!container) return;
 
-  container.innerHTML = "Loading gaming news…";
-
-  const API_URL = "https://games-news-api.p.rapidapi.com/news";
+  container.innerHTML = `<div class="news-loading">Loading Google News…</div>`;
 
   try {
-    const cached = cacheGet("all_gaming_news");
-    if (cached) return renderNewsResults(cached, container);
+    const cached = cacheGet("google_news_gaming");
+    if (cached) {
+      return renderGoogleNews(cached, container);
+    }
 
-    const res = await fetch(API_URL, {
-      method: "GET",
-      headers: {
-        "x-rapidapi-host": "games-news-api.p.rapidapi.com",
-        "x-rapidapi-key": GAME_NEWS_API_KEY
-      }
-    });
+    const res = await fetch(GOOGLE_NEWS_URL);
+    if (!res.ok) throw new Error("Google RSS failed");
 
-    if (!res.ok) throw new Error("News API error");
+    const json = await res.json();
 
-    const data = await res.json();
-    cacheSet("all_gaming_news", data);
+    cacheSet("google_news_gaming", json);
 
-    renderNewsResults(data, container);
+    renderGoogleNews(json, container);
 
-  } catch (err) {
-    container.innerHTML = "Failed to load news.";
-    console.error(err);
+  } catch (e) {
+    container.innerHTML = `<div class="news-error">Failed to load Google News.</div>`;
+    console.error(e);
   }
 }
 
-// Render news card list
-function renderNewsResults(data, container) {
+function renderGoogleNews(json, container) {
   container.innerHTML = "";
 
-  if (!Array.isArray(data) || data.length === 0) {
-    container.innerHTML = "<div>No news available.</div>";
+  if (!json.items || json.items.length === 0) {
+    container.innerHTML = `<div>No news available.</div>`;
     return;
   }
 
-  data.slice(0, 12).forEach(article => {
-    const card = document.createElement("div");
-    card.className = "news-item";
+  json.items.slice(0, 12).forEach(article => {
+    const thumb = article.thumbnail || "";
+    const cleanDesc = article.description.replace(/<[^>]+>/g, "").slice(0, 200) + "…";
 
-    const img = article.image_url
-      ? `<img src="${article.image_url}" style="width:100%;border-radius:8px;margin-bottom:10px;">`
-      : "";
-
-    card.innerHTML = `
-      ${img}
-      <h2>${article.title}</h2>
-      <p>${article.description ? article.description.slice(0, 200) + "…" : ""}</p>
-      <a href="${article.url}" target="_blank">Read full article</a>
-      <div class="date">${new Date(article.published).toLocaleString()}</div>
-    `;
+    const card = el("div", { class: "news-item" }, [
+      thumb ? el("img", { src: thumb }) : "",
+      el("h2", {}, article.title),
+      el("p", {}, cleanDesc),
+      el("a", { href: article.link, target: "_blank" }, "Read full article"),
+      el("div", { class: "date" }, new Date(article.pubDate).toLocaleString())
+    ]);
 
     container.appendChild(card);
   });
@@ -216,22 +177,25 @@ function renderNewsResults(data, container) {
 
 
 /* ============================================================
-   MEMES PAGE
+   MEMES PAGE (Reddit)
 ============================================================ */
 async function renderMemesPage() {
-  const container = document.querySelector(".meme-grid");
-  if (!container) return;
+  const grid = document.querySelector(".meme-grid");
+  if (!grid) return;
 
-  container.innerHTML = "Loading memes…";
+  grid.innerHTML = "Loading memes…";
 
   try {
-    const memes = await fetchReddit("gamingmemes", 12);
-    container.innerHTML = "";
+    const res = await fetch("https://www.reddit.com/r/gamingmemes/hot.json?limit=12");
+    const json = await res.json();
+    const memes = json.data.children.map(m => m.data);
+
+    grid.innerHTML = "";
 
     memes.forEach(m => {
-      const img = m.url_overridden_by_dest || m.thumbnail;
+      const img = m.url_overridden_by_dest;
 
-      container.appendChild(
+      grid.appendChild(
         el("div", { class: "meme-card" }, [
           img ? el("img", { src: img }) : "",
           el("p", {}, m.title)
@@ -240,7 +204,7 @@ async function renderMemesPage() {
     });
 
   } catch {
-    container.innerHTML = "Failed to load memes.";
+    grid.innerHTML = "Failed to load memes.";
   }
 }
 
@@ -290,12 +254,14 @@ async function renderForumsPage() {
     { title: "General Gaming", desc: "All platforms & genres." }
   ];
 
+  grid.innerHTML = "";
+
   categories.forEach(c => {
     grid.appendChild(
       el("div", { class: "forum-item" }, [
         el("h2", {}, c.title),
         el("p", {}, c.desc),
-        el("div", { class: "meta" }, `${Math.floor(Math.random()*1500)} posts`),
+        el("div", { class: "meta" }, `${Math.floor(Math.random()*1200)} posts`),
         el("a", { class: "btn", href: "#" }, "Enter")
       ])
     );
@@ -316,6 +282,8 @@ async function renderGiveawaysPage() {
     { title: "Gaming Headset", desc: "Pro gaming headset." }
   ];
 
+  grid.innerHTML = "";
+
   items.forEach(item => {
     grid.appendChild(
       el("div", { class: "giveaway-card" }, [
@@ -329,7 +297,7 @@ async function renderGiveawaysPage() {
 
 
 /* ============================================================
-   PAGE DETECTOR & BOOT
+   PAGE DETECTOR & AUTO-INIT
 ============================================================ */
 document.addEventListener("DOMContentLoaded", () => {
   if (document.querySelector(".news-list")) renderNewsPage();
