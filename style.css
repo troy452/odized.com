@@ -5,51 +5,49 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-:root {
-  --bg: rgba(0, 0, 0, 0.75);
-  --panel: rgba(20, 22, 35, 0.75);
-  --muted: #b2b7c9;
-  --accent: #6aa8ff;
-  --text: #ffffff;
-
-  --card-glow: 0 0 22px rgba(90, 150, 255, 0.25);
-}
-
-/* Themes override only colors, not layout */
-.theme-roblox {
-  --accent: #ff3d3d;
-  --panel: rgba(15, 15, 15, 0.75);
-}
-.theme-fortnite {
-  --accent: #8d3afd;
-  --panel: rgba(18, 13, 40, 0.75);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* ============================================================
-   BODY + BACKGROUND WALLPAPER
+   BACKGROUND (Your wallpaper.jpeg)
 ============================================================ */
 body {
-  background: url("assets/wallpaper.jpg") no-repeat center center fixed;
+  background: url("assets/wallpaper.jpeg") no-repeat center center fixed;
   background-size: cover;
-  color: var(--text);
+  color: #ffffff;
   min-height: 100vh;
   position: relative;
 }
 
-/* Blur + dark overlay */
+/* Dark overlay + clarity */
 body::before {
   content: "";
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  backdrop-filter: blur(9px);
-  background: rgba(0, 0, 0, 0.45);
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(6px);
+  pointer-events: none;
   z-index: -1;
+}
+
+/* ============================================================
+   THEME VARIABLES
+============================================================ */
+:root {
+  --panel: rgba(20, 22, 35, 0.75);
+  --muted: #b6b8c7;
+  --accent: #a56bff;
+  --text: #ffffff;
+}
+
+/* Roblox Theme */
+.theme-roblox {
+  --accent: #ff4d4d;
+}
+
+/* Fortnite Theme */
+.theme-fortnite {
+  --accent: #7c3aed;
 }
 
 /* ============================================================
@@ -57,73 +55,78 @@ body::before {
 ============================================================ */
 .header {
   background: var(--panel);
-  backdrop-filter: blur(6px);
-  padding: 14px 20px;
+  backdrop-filter: blur(8px);
+  padding: 12px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid rgba(120,120,160,0.25);
+  border-bottom: 1px solid rgba(255,255,255,0.12);
   position: sticky;
   top: 0;
   z-index: 50;
 }
 
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .logo {
   font-size: 1.7rem;
-  font-weight: 700;
+  font-weight: bold;
   color: var(--accent);
-  text-shadow: 0 0 8px var(--accent);
+  text-shadow: 0 0 10px var(--accent);
 }
 
 #hamburger {
   display: none;
   font-size: 22px;
   background: none;
+  color: white;
   border: none;
-  color: var(--text);
-  cursor: pointer;
 }
 
-/* NAVIGATION */
+/* NAV LINKS */
 .nav a {
-  margin-left: 18px;
+  margin-left: 16px;
   text-decoration: none;
   color: #e0e4f0;
-  font-size: 1rem;
   transition: 0.2s;
 }
 
 .nav a:hover,
 .nav a.active {
   color: var(--accent);
-  text-shadow: 0 0 8px var(--accent);
+  text-shadow: 0 0 10px var(--accent);
 }
 
 /* ============================================================
    MOBILE NAV
 ============================================================ */
 @media (max-width: 860px) {
+
   #hamburger { display: block; }
 
   .nav {
     display: none;
     flex-direction: column;
     background: var(--panel);
-    border-bottom: 1px solid rgba(255,255,255,0.15);
     padding: 15px;
     position: absolute;
-    top: 60px;
     left: 0;
     right: 0;
+    top: 60px;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
   }
 
   .nav a {
-    padding: 10px 0;
     margin-left: 0;
+    padding: 10px;
+    font-size: 1.1rem;
   }
 }
 
-/* MOBILE BOTTOM NAV */
 .bottom-nav {
   display: none;
 }
@@ -132,8 +135,8 @@ body::before {
   .bottom-nav {
     display: flex;
     justify-content: space-around;
-    padding: 12px 0;
     background: var(--panel);
+    padding: 10px 0;
     border-top: 1px solid rgba(255,255,255,0.12);
     position: fixed;
     bottom: 0;
@@ -144,9 +147,67 @@ body::before {
 
   .bottom-nav a {
     color: white;
-    font-size: 1rem;
     text-decoration: none;
   }
+}
+
+/* ============================================================
+   TOP GIVEAWAY BANNER (Centered)
+============================================================ */
+.giveaway-banner-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.giveaway-banner {
+  text-align: center;
+  background: rgba(0,0,0,0.55);
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 22px 28px;
+  border-radius: 14px;
+  max-width: 900px;
+  width: 90%;
+  backdrop-filter: blur(14px);
+}
+
+.giveaway-banner h2 {
+  font-size: 1.8rem;
+  color: var(--accent);
+  margin-bottom: 10px;
+  text-shadow: 0 0 10px var(--accent);
+}
+
+.giveaway-banner p {
+  color: #eaeaea;
+  opacity: 0.9;
+}
+
+.giveaway-banner .btn {
+  margin-top: 15px;
+}
+
+.timer {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* ============================================================
+   BUTTONS
+============================================================ */
+.btn {
+  background: var(--accent);
+  padding: 12px 20px;
+  border-radius: 8px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: 0.25s;
+}
+.btn:hover {
+  opacity: 0.8;
 }
 
 /* ============================================================
@@ -154,201 +215,57 @@ body::before {
 ============================================================ */
 .hero {
   text-align: center;
-  padding: 75px 20px;
-  background: linear-gradient(135deg, rgba(30,40,70,0.45), rgba(12,14,20,0.55));
-  backdrop-filter: blur(5px);
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding: 60px 20px;
 }
 
 .hero h1 {
-  font-size: 2.9rem;
+  font-size: 2.6rem;
   color: var(--accent);
-  text-shadow: 0 0 14px var(--accent);
   margin-bottom: 10px;
+  text-shadow: 0 0 10px var(--accent);
 }
 
 .hero p {
-  color: #d6d9e5;
+  color: #e0e0e0;
+  opacity: 0.9;
 }
 
 /* ============================================================
    GRID LAYOUT
 ============================================================ */
 .grid {
-  max-width: 1150px;
+  max-width: 1100px;
   margin: 40px auto;
   padding: 0 20px;
+
   display: grid;
-  gap: 22px;
+  gap: 20px;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
 
-/* ============================================================
-   CARDS
-============================================================ */
 .card {
   background: var(--panel);
   padding: 25px;
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,0.08);
-  box-shadow: var(--card-glow);
-  transition: 0.25s;
-  color: white;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.12);
   text-decoration: none;
+  color: white;
+  backdrop-filter: blur(6px);
+  transition: 0.25s;
 }
 
 .card:hover {
-  transform: translateY(-7px);
-  box-shadow: 0 0 30px var(--accent);
+  transform: translateY(-6px);
+  box-shadow: 0 0 20px var(--accent);
 }
 
 .card h2 {
-  color: var(--accent);
   margin-bottom: 8px;
-  text-shadow: 0 0 8px var(--accent);
+  color: var(--accent);
 }
 
 .card p {
-  color: #f8f8f8;
-  opacity: 0.85;
-}
-
-/* ============================================================
-   PAGE HEADER (News, Giveaways, etc.)
-============================================================ */
-.page-header {
-  text-align: center;
-  padding: 48px 20px;
-  background: rgba(0,0,0,0.45);
-  backdrop-filter: blur(4px);
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-
-.page-header h1 {
-  font-size: 2.2rem;
-  color: var(--accent);
-  text-shadow: 0 0 10px var(--accent);
-}
-
-.page-header p {
-  color: #c8ccda;
-}
-
-/* ============================================================
-   NEWS LIST
-============================================================ */
-.news-list {
-  max-width: 900px;
-  margin: 30px auto;
-  padding: 0 20px;
-  display: grid;
-  gap: 18px;
-}
-
-.news-item {
-  background: var(--panel);
-  padding: 20px;
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.1);
-}
-
-.news-item h2 {
-  color: var(--accent);
-}
-
-/* ============================================================
-   FORUM ITEMS
-============================================================ */
-.forum-list {
-  max-width: 900px;
-  margin: 30px auto;
-  padding: 0 20px;
-  display: grid;
-  gap: 18px;
-}
-
-.forum-item {
-  background: var(--panel);
-  padding: 20px;
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.1);
-}
-
-/* ============================================================
-   BUTTONS
-============================================================ */
-.btn {
-  display: inline-block;
-  margin-top: 14px;
-  padding: 10px 16px;
-  background: var(--accent);
-  border-radius: 6px;
-  border: none;
-  color: white;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.btn:hover {
-  opacity: 0.85;
-}
-
-/* ============================================================
-   MEMES
-============================================================ */
-.meme-grid {
-  max-width: 1000px;
-  margin: 30px auto;
-  padding: 0 20px;
-  display: grid;
-  gap: 22px;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-}
-
-.meme-card {
-  background: var(--panel);
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.1);
-}
-
-/* ============================================================
-   PROFILES
-============================================================ */
-.profile-grid {
-  max-width: 1000px;
-  margin: 30px auto;
-  padding: 0 20px;
-  display: grid;
-  gap: 22px;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-}
-
-.profile-card {
-  background: var(--panel);
-  padding: 20px;
-  border-radius: 12px;
-  text-align: center;
-}
-
-/* ============================================================
-   GIVEAWAYS
-============================================================ */
-.giveaway-grid {
-  max-width: 1200px;
-  margin: 35px auto;
-  padding: 0 20px;
-  display: grid;
-  gap: 22px;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-}
-
-.giveaway-card {
-  background: var(--panel);
-  padding: 25px;
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,0.12);
-  text-align: center;
+  opacity: 0.9;
 }
 
 /* ============================================================
@@ -356,10 +273,9 @@ body::before {
 ============================================================ */
 .footer {
   text-align: center;
-  padding: 22px;
-  margin-top: 50px;
-  background: rgba(0,0,0,0.55);
-  backdrop-filter: blur(5px);
+  padding: 20px;
+  margin-top: 40px;
+  background: rgba(0,0,0,0.45);
   border-top: 1px solid rgba(255,255,255,0.1);
   color: var(--muted);
 }
@@ -368,10 +284,10 @@ body::before {
    ANIMATIONS
 ============================================================ */
 .fade-in {
-  animation: fadein 0.5s ease both;
+  animation: fadeIn 0.5s ease both;
 }
 
-@keyframes fadein {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: translateY(0); }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
