@@ -1,6 +1,6 @@
-/* -----------------------------------------
+/* -------------------------
    GLOBAL RESET
------------------------------------------ */
+-------------------------- */
 * {
   margin: 0;
   padding: 0;
@@ -8,54 +8,46 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* -----------------------------------------
-   DEFAULT THEME VARIABLES
------------------------------------------ */
+/* -------------------------
+   THEME VARIABLES
+-------------------------- */
 :root {
   --bg: #0d0f16;
   --panel: #1a1f2e;
-  --text: #ffffff;
-  --muted: #a3acc7;
+  --muted: #9aa3b8;
   --accent: #4da3ff;
-  --border: #2b3145;
+  --text: #ffffff;
 }
 
-/* -----------------------------------------
-   THEME: ROBLOX
------------------------------------------ */
+/* Roblox Theme */
 .theme-roblox {
-  --accent: #ff3333;
+  --accent: #ff4d4d;
   --panel: #171717;
-  --bg: #090909;
+  --bg: #080808;
 }
 
-/* -----------------------------------------
-   THEME: FORTNITE
------------------------------------------ */
+/* Fortnite Theme */
 .theme-fortnite {
-  --accent: #8c39ff;
-  --panel: #111326;
-  --bg: #050612;
+  --accent: #7c3aed;
+  --panel: #101322;
+  --bg: #050613;
 }
 
-/* -----------------------------------------
-   BODY
------------------------------------------ */
 body {
   background: var(--bg);
   color: var(--text);
 }
 
-/* -----------------------------------------
+/* -------------------------
    HEADER
------------------------------------------ */
+-------------------------- */
 .header {
   background: var(--panel);
-  padding: 14px 20px;
+  padding: 12px 18px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid #2b3145;
   position: sticky;
   top: 0;
   z-index: 20;
@@ -64,29 +56,28 @@ body {
 .header-left {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .logo {
-  font-size: 1.7rem;
+  font-size: 1.6rem;
   font-weight: bold;
   color: var(--accent);
 }
 
-/* Hamburger */
 #hamburger {
   display: none;
-  font-size: 24px;
-  background: none;
+  font-size: 22px;
   color: white;
+  background: none;
   border: none;
   cursor: pointer;
 }
 
-/* Desktop nav */
+/* NAVIGATION */
 .nav a {
-  color: var(--muted);
-  margin-left: 18px;
+  color: #d0d6e4;
+  margin-left: 16px;
   text-decoration: none;
   font-size: 1rem;
 }
@@ -96,9 +87,9 @@ body {
   color: var(--accent);
 }
 
-/* -----------------------------------------
+/* -------------------------
    MOBILE NAV
------------------------------------------ */
+-------------------------- */
 @media (max-width: 860px) {
   #hamburger { display: block; }
 
@@ -106,23 +97,24 @@ body {
     display: none;
     flex-direction: column;
     background: var(--panel);
-    padding: 15px 0;
     position: absolute;
-    top: 65px;
     left: 0;
     right: 0;
-    border-bottom: 1px solid var(--border);
+    top: 60px;
+    padding: 15px;
+    border-bottom: 1px solid #222;
   }
 
   .nav a {
-    padding: 12px 20px;
-    border-bottom: 1px solid #111a;
+    padding: 10px 0;
+    font-size: 1.1rem;
+    margin-left: 0;
   }
 }
 
-/* -----------------------------------------
-   BOTTOM MOBILE NAV
------------------------------------------ */
+/* -------------------------
+   BOTTOM NAV (MOBILE)
+-------------------------- */
 .bottom-nav {
   display: none;
 }
@@ -131,224 +123,276 @@ body {
   .bottom-nav {
     display: flex;
     justify-content: space-around;
-    background: var(--panel);
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 12px 0;
-    border-top: 1px solid var(--border);
-    z-index: 50;
+    background: var(--panel);
+    padding: 10px 0;
+    border-top: 1px solid #222;
+    z-index: 40;
   }
 
   .bottom-nav a {
-    color: var(--text);
+    color: white;
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
 }
 
-/* -----------------------------------------
-   HERO SECTION (HOME PAGE)
------------------------------------------ */
+/* -------------------------
+   HERO SECTION - HOME PAGE
+-------------------------- */
 .hero {
   text-align: center;
-  padding: 80px 20px;
-  background: linear-gradient(135deg, #20304a, #121826);
+  padding: 70px 20px;
+  background: linear-gradient(135deg, #1f2a44, #111827);
 }
 
 .hero h1 {
-  font-size: 3rem;
   color: var(--accent);
-  margin-bottom: 12px;
+  font-size: 2.8rem;
+  margin-bottom: 10px;
 }
 
 .hero p {
-  color: var(--muted);
-  font-size: 1.1rem;
+  opacity: 0.9;
 }
 
-/* -----------------------------------------
-   GENERIC GRID / CARDS
------------------------------------------ */
-.grid,
-.news-list,
-.forum-list,
-.meme-grid,
-.profile-grid,
-.giveaway-grid {
+/* -------------------------
+   GRID LAYOUT
+-------------------------- */
+.grid {
   max-width: 1100px;
-  margin: 35px auto;
+  margin: 40px auto;
   padding: 0 20px;
   display: grid;
   gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
 
-/* Generic card wrapper */
-.card,
-.news-item,
-.forum-item,
-.meme-card,
-.profile-card,
-.giveaway-card {
+/* -------------------------
+   CARDS
+-------------------------- */
+.card {
   background: var(--panel);
-  border: 1px solid var(--border);
+  padding: 25px;
   border-radius: 12px;
-  padding: 22px;
+  border: 1px solid #2b3145;
+  text-decoration: none;
+  color: white;
   transition: 0.25s;
 }
 
-/* Hover effect */
-.card:hover,
-.news-item:hover,
-.forum-item:hover,
-.meme-card:hover,
-.profile-card:hover,
-.giveaway-card:hover {
+.card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 10px 25px #0005;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
 }
 
-/* Common card title */
-.card h2,
-.news-item h2,
-.forum-item h2,
-.meme-card h2,
-.profile-card h2,
-.giveaway-card h2 {
+.card h2 {
+  margin-bottom: 8px;
   color: var(--accent);
-  margin-bottom: 10px;
 }
 
-/* -----------------------------------------
-   GRID LAYOUTS
------------------------------------------ */
-.grid {
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+.card a {
+  color: white !important;        /* FIX SUBTEXT BLUE → WHITE */
+  text-decoration: none;
 }
 
-.meme-grid {
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+.card a:hover {
+  color: var(--accent) !important;
 }
 
-.profile-grid {
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-}
-
-.giveaway-grid {
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-}
-
-/* -----------------------------------------
-   MEMES
------------------------------------------ */
-.meme-card img {
-  width: 100%;
-  border-radius: 8px;
-  margin-bottom: 10px;
-}
-
-/* -----------------------------------------
-   PROFILES
------------------------------------------ */
-.profile-card {
-  text-align: center;
-}
-
-.profile-card img {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  margin-bottom: 12px;
-}
-
-.rank {
-  display: inline-block;
-  margin-top: 8px;
-  padding: 6px 10px;
-  background: var(--accent);
-  color: #fff;
-  border-radius: 6px;
-  font-size: 0.85rem;
-}
-
-/* -----------------------------------------
-   PAGE HEADER
------------------------------------------ */
+/* -------------------------
+   PAGE HEADERS
+-------------------------- */
 .page-header {
   text-align: center;
-  padding: 50px 20px;
-  background: var(--panel);
-  border-bottom: 1px solid var(--border);
+  padding: 48px 20px;
+  border-bottom: 1px solid #222;
 }
 
 .page-header h1 {
-  font-size: 2.1rem;
+  font-size: 2rem;
   color: var(--accent);
+  margin-bottom: 8px;
 }
 
 .page-header p {
-  margin-top: 6px;
   color: var(--muted);
 }
 
-/* -----------------------------------------
+/* -------------------------
+   NEWS PAGE
+-------------------------- */
+.news-list {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 0 20px;
+  display: grid;
+  gap: 16px;
+}
+
+.news-item {
+  background: var(--panel);
+  padding: 18px;
+  border-radius: 10px;
+  border: 1px solid #2b3145;
+}
+
+.news-item h2 {
+  color: var(--accent);
+}
+
+/* -------------------------
+   FORUM PAGE
+-------------------------- */
+.forum-list {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 0 20px;
+  display: grid;
+  gap: 16px;
+}
+
+.forum-item {
+  background: var(--panel);
+  padding: 18px;
+  border-radius: 10px;
+  border: 1px solid #2b3145;
+}
+
+/* -------------------------
    BUTTONS
------------------------------------------ */
+-------------------------- */
 .btn {
   display: inline-block;
+  margin-top: 12px;
   padding: 10px 14px;
   background: var(--accent);
-  border: none;
+  color: #fff;
   border-radius: 6px;
-  color: white;
   text-decoration: none;
+  border: none;
   cursor: pointer;
-  margin-top: 12px;
-  font-weight: 500;
-  transition: 0.2s;
+  transition: 0.25s;
 }
 
 .btn:hover {
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
-/* -----------------------------------------
+/* -------------------------
+   MEMES PAGE
+-------------------------- */
+.meme-grid {
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 0 20px;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.meme-card {
+  background: var(--panel);
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #2b3145;
+}
+
+.meme-card img {
+  width: 100%;
+  display: block;
+}
+
+.meme-card p {
+  padding: 10px;
+}
+
+/* -------------------------
+   PROFILES PAGE
+-------------------------- */
+.profile-grid {
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.profile-card {
+  background: var(--panel);
+  padding: 18px;
+  text-align: center;
+  border-radius: 10px;
+  border: 1px solid #2b3145;
+}
+
+.profile-card img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.profile-card h2 {
+  color: var(--accent);
+}
+
+/* -------------------------
+   GIVEAWAYS PAGE
+-------------------------- */
+.giveaway-grid {
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 0 20px;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.giveaway-card {
+  background: var(--panel);
+  padding: 18px;
+  border-radius: 10px;
+  border: 1px solid #2b3145;
+}
+
+.giveaway-card h2 {
+  color: var(--accent);
+}
+
+/* -------------------------
    FOOTER
------------------------------------------ */
+-------------------------- */
 .footer {
   text-align: center;
-  padding: 25px;
+  font-size: 0.9rem;
+  padding: 20px;
   margin-top: 40px;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid #2b3145;
   background: #111827;
   color: var(--muted);
 }
 
-/* -----------------------------------------
+/* -------------------------
    ANIMATIONS
------------------------------------------ */
+-------------------------- */
 .fade-in {
   animation: fadeIn 0.4s ease both;
 }
 
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-/* -----------------------------------------
-   DATE LABELS
------------------------------------------ */
+/* -------------------------
+   UTILITIES
+-------------------------- */
 .date {
-  margin-top: 8px;
   color: var(--muted);
-  font-size: 0.85rem;
-}
-.card a {
-  color: white !important;
-}
-
-.card a:hover {
-  color: var(--accent) !important; /* keep hover effect */
+  font-size: 0.9rem;
 }
