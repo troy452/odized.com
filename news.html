@@ -3,11 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gaming News - Gaming Community Hub</title>
-  <link rel="stylesheet" href="styles.css" />
+  <title>Latest Gaming News - Gaming Community Hub</title>
+
+  <!-- FIXED CSS LINK -->
+  <link rel="stylesheet" href="styles.css">
+
 </head>
 <body>
 
+<!-- FIXED FULL HEADER -->
 <header class="header">
   <div class="header-left">
     <button id="hamburger">☰</button>
@@ -32,18 +36,31 @@
   </div>
 </header>
 
+<!-- BOTTOM NAV MOBILE -->
+<nav class="bottom-nav">
+  <a href="index.html">Home</a>
+  <a href="forums.html">Forums</a>
+  <a href="memes.html">Memes</a>
+  <a href="profiles.html">Profile</a>
+</nav>
+
+<!-- PAGE HEADER -->
 <section class="page-header fade-in">
   <h1>📰 Latest Gaming News</h1>
   <p>Live updates from gaming sources.</p>
 </section>
 
-<!-- 🟦 This is where JS will insert the API news -->
-<section class="news-list fade-in"></section>
+<!-- NEWS LIST -->
+<section class="news-list fade-in">
+  <!-- FILLED BY script.js -->
+</section>
 
 <footer class="footer">
   © 2025 Gaming Community Hub — All rights reserved.
 </footer>
 
+<!-- FIXED: script loaded LAST -->
 <script src="script.js"></script>
+
 </body>
 </html>
