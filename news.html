@@ -1,86 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Gaming Community Hub — News</title>
-  <meta name="description" content="Live gaming news: Roblox events, Fortnite updates, esports and trending stories." />
-  <link rel="icon" href="assets/favicon.ico" />
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gaming News - Gaming Community Hub</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header class="header" role="banner">
-    <div class="header-left">
-      <button id="hamburger" aria-label="Open navigation">☰</button>
-      <div class="logo">Gaming Hub</div>
-    </div>
+<header class="header">
+  <div class="header-left">
+    <button id="hamburger">☰</button>
+    <div class="logo">Gaming Hub</div>
+  </div>
 
-    <nav class="nav" id="mainNav" aria-label="Primary navigation">
-      <a href="index.html">Home</a>
-      <a href="news.html" class="active">News</a>
-      <a href="forums.html">Forums</a>
-      <a href="memes.html">Memes</a>
-      <a href="profiles.html">Profiles</a>
-      <a href="giveaways.html">Giveaways</a>
-    </nav>
-
-    <div class="header-right">
-      <div class="theme-switch">
-        <label for="themeSelect" class="sr-only">Theme</label>
-        <select id="themeSelect" aria-label="Theme selector">
-          <option value="">Default</option>
-          <option value="theme-roblox">Roblox</option>
-          <option value="theme-fortnite">Fortnite</option>
-        </select>
-      </div>
-    </div>
-  </header>
-
-  <!-- MOBILE BOTTOM NAV -->
-  <nav class="bottom-nav" aria-hidden="false">
+  <nav class="nav" id="mainNav">
     <a href="index.html">Home</a>
+    <a href="news.html" class="active">News</a>
     <a href="forums.html">Forums</a>
     <a href="memes.html">Memes</a>
-    <a href="profiles.html">Profile</a>
+    <a href="profiles.html">Profiles</a>
+    <a href="giveaways.html">Giveaways</a>
   </nav>
 
-  <!-- PAGE HEADER -->
-  <section class="page-header fade-in" role="region" aria-label="News header">
-    <h1>📰 Gaming News</h1>
-    <p>Live updates from Roblox, Fortnite, esports and trending gaming stories. Contents are cached for performance.</p>
-  </section>
+  <div class="header-right">
+    <select id="themeSelect">
+      <option value="">Default</option>
+      <option value="theme-roblox">Roblox</option>
+      <option value="theme-fortnite">Fortnite</option>
+    </select>
+  </div>
+</header>
 
-  <!-- NEWS LIST (script.js will inject content here) -->
-  <main>
-    <section class="news-list fade-in" aria-live="polite" aria-busy="false" role="region">
-      <!-- Fallback / graceful content for users without JS -->
-      <noscript>
-        <div class="news-item">
-          <h2>JavaScript required for live feeds</h2>
-          <p>This page uses live feeds (Roblox blog, Reddit &amp; other sources). Enable JavaScript to load the latest content. If you prefer, check the official Roblox blog or Fortnite news pages directly.</p>
-        </div>
-      </noscript>
+<section class="page-header fade-in">
+  <h1>📰 Latest Gaming News</h1>
+  <p>Live updates from gaming sources.</p>
+</section>
 
-      <!-- Optional lightweight placeholders while script fetches data -->
-      <div class="news-item">
-        <h2>Loading latest headlines…</h2>
-        <p>Please wait a moment while we fetch news from community feeds and official blogs.</p>
-      </div>
-    </section>
-  </main>
+<!-- 🟦 This is where JS will insert the API news -->
+<section class="news-list fade-in"></section>
 
-  <footer class="footer" role="contentinfo">
-    © 2025 Gaming Community Hub — Live news via community feeds.
-  </footer>
+<footer class="footer">
+  © 2025 Gaming Community Hub — All rights reserved.
+</footer>
 
-  <!-- Live content script (caching + Reddit / Roblox / fallbacks) -->
-  <script src="script.js" defer></script>
-
-  <!-- Accessibility helper -->
-  <style>
-    .sr-only { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
-  </style>
+<script src="script.js"></script>
 </body>
 </html>
