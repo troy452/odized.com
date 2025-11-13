@@ -12,13 +12,13 @@
 <body>
 
   <!-- HEADER -->
-  <header class="header" role="banner">
+  <header class="header">
     <div class="header-left">
-      <button id="hamburger" aria-label="Open navigation">☰</button>
+      <button id="hamburger" aria-label="Open menu">☰</button>
       <div class="logo">Gaming Hub</div>
     </div>
 
-    <nav class="nav" id="mainNav" aria-label="Main navigation">
+    <nav class="nav" id="mainNav">
       <a href="index.html">Home</a>
       <a href="news.html">News</a>
       <a href="forums.html">Forums</a>
@@ -28,14 +28,11 @@
     </nav>
 
     <div class="header-right">
-      <div class="theme-switch">
-        <label for="themeSelect" class="sr-only">Theme</label>
-        <select id="themeSelect">
-          <option value="">Default</option>
-          <option value="theme-roblox">Roblox</option>
-          <option value="theme-fortnite">Fortnite</option>
-        </select>
-      </div>
+      <select id="themeSelect">
+        <option value="">Default</option>
+        <option value="theme-roblox">Roblox</option>
+        <option value="theme-fortnite">Fortnite</option>
+      </select>
     </div>
   </header>
 
@@ -50,38 +47,35 @@
   <!-- PAGE HEADER -->
   <section class="page-header fade-in">
     <h1>🎁 Monthly Giveaways</h1>
-    <p>Enter for a chance to win real gaming prizes — cards, V-Bucks, hardware and more.</p>
+    <p>Enter for a chance to win real gaming prizes — Roblox cards, V-Bucks, hardware and more.</p>
   </section>
 
   <!-- GIVEAWAY GRID -->
   <main>
-    <section class="giveaway-grid fade-in" aria-live="polite" aria-busy="false">
+    <section class="giveaway-grid fade-in">
 
-      <!-- JS disabled fallback -->
+      <!-- JS fallback -->
       <noscript>
         <div class="giveaway-card">
           <h2>$20 Roblox Gift Card</h2>
-          <p>Enable JavaScript to load current giveaways.</p>
+          <p>Enable JavaScript to load giveaways.</p>
         </div>
       </noscript>
 
-      <!-- Temporary loading placeholder -->
+      <!-- Loading Placeholder -->
       <div class="giveaway-card">
         <h2>Loading giveaways…</h2>
-        <p>Please wait while we fetch this month's prizes.</p>
+        <p>Please wait while we fetch this month's rewards.</p>
       </div>
 
     </section>
   </main>
 
+  <!-- FOOTER -->
   <footer class="footer">
-    © 2025 Gaming Community Hub — Monthly prize drops for players.
+    © 2025 Gaming Community Hub — Monthly prizes for real players.
   </footer>
 
   <script src="script.js" defer></script>
-
-  <style>
-    .sr-only { position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0; }
-  </style>
 </body>
 </html>
