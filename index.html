@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Gaming Community Hub — Home</title>
+
   <meta name="description" content="Gaming Community Hub — live Roblox & Fortnite news, memes, forums and giveaways." />
   <link rel="icon" href="assets/favicon.ico" />
   <link rel="stylesheet" href="style.css" />
@@ -11,100 +12,93 @@
 
 <body>
 
-<!-- HEADER -->
-<header class="header">
-  <div class="header-left">
-    <button id="hamburger" aria-label="Open menu">☰</button>
-    <div class="logo">Gaming Hub</div>
-  </div>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-left">
+      <button id="hamburger">☰</button>
+      <div class="logo">Gaming Hub</div>
+    </div>
 
-  <nav class="nav" id="mainNav">
-    <a href="index.html" class="active">Home</a>
-    <a href="news.html">News</a>
+    <nav class="nav" id="mainNav">
+      <a href="index.html" class="active">Home</a>
+      <a href="news.html">News</a>
+      <a href="forums.html">Forums</a>
+      <a href="memes.html">Memes</a>
+      <a href="profiles.html">Profiles</a>
+      <a href="giveaways.html">Giveaways</a>
+    </nav>
+
+    <div class="header-right">
+      <select id="themeSelect">
+        <option value="">Default</option>
+        <option value="theme-roblox">Roblox</option>
+        <option value="theme-fortnite">Fortnite</option>
+      </select>
+    </div>
+  </header>
+
+  <!-- MOBILE NAV -->
+  <nav class="bottom-nav">
+    <a href="index.html">Home</a>
     <a href="forums.html">Forums</a>
     <a href="memes.html">Memes</a>
-    <a href="profiles.html">Profiles</a>
-    <a href="giveaways.html">Giveaways</a>
+    <a href="profiles.html">Profile</a>
   </nav>
 
-  <div class="header-right">
-    <select id="themeSelect">
-      <option value="">Default</option>
-      <option value="theme-roblox">Roblox</option>
-      <option value="theme-fortnite">Fortnite</option>
-    </select>
+  <!-- TOP GIVEAWAY BANNER (CENTERED) -->
+  <div class="giveaway-banner-wrapper fade-in">
+    <div class="giveaway-banner">
+      <h2>🎁 Win a $20 Roblox Gift Card or 1,000 V-Bucks</h2>
+      <p>Join thousands of players entering our monthly prizes. Claim exclusive rewards, skins and game currency for free.</p>
+      <button class="btn">Enter Giveaway</button>
+      <div class="timer">Next Winner In: Loading…</div>
+    </div>
   </div>
-</header>
 
-<!-- MOBILE BOTTOM NAV -->
-<nav class="bottom-nav">
-  <a href="index.html">Home</a>
-  <a href="forums.html">Forums</a>
-  <a href="memes.html">Memes</a>
-  <a href="profiles.html">Profile</a>
-</nav>
-
-<!-- 🔥 BIG GIVEAWAY HERO SECTION -->
-<section class="giveaway-feature fade-in">
-  <h1>🎉 Win a $20 Roblox Gift Card or 1,000 V-Bucks</h1>
-  <p>Join thousands of players entering our monthly prizes.  
-     Claim exclusive rewards, skins and game currency for free.</p>
-
-  <button class="btn btn-big" onclick="openLocker()">Enter Giveaway</button>
-
-  <div class="giveaway-timer">⏳ Next Winner In: <span id="countdown">Loading…</span></div>
-</section>
-
-<!-- HERO (Secondary, moved down) -->
-<section class="hero fade-in">
-  <h1>Welcome to the Gaming Community Hub</h1>
-  <p>Your home for Roblox & Fortnite news, guides, memes and giveaways.</p>
-</section>
-
-<!-- MAIN GRID -->
-<main>
-  <section class="grid fade-in">
-    <!-- Trending Games injected by script.js -->
-
-    <a class="card" href="news.html">
-      <h2>📰 Latest News</h2>
-      <p>Live gaming updates, patch notes and headlines.</p>
-    </a>
-
-    <a class="card" href="forums.html">
-      <h2>💬 Forums</h2>
-      <p>Discuss games, share clips and strategies.</p>
-    </a>
-
-    <a class="card" href="memes.html">
-      <h2>🔥 Meme Zone</h2>
-      <p>Fresh gaming memes posted daily.</p>
-    </a>
-
-    <a class="card" href="profiles.html">
-      <h2>🌟 Profiles</h2>
-      <p>Top community players and avatars.</p>
-    </a>
-
-    <a class="card" href="giveaways.html">
-      <h2>🎁 Giveaways</h2>
-      <p>Win gaming rewards monthly!</p>
-    </a>
+  <!-- HERO SECTION -->
+  <section class="hero fade-in">
+    <h1>Welcome to the Gaming Community Hub</h1>
+    <p>Your home for Roblox & Fortnite news, guides, memes and giveaways.</p>
   </section>
-</main>
 
-<!-- NEWS PREVIEW -->
-<section class="news-list fade-in" style="max-width:1100px;margin:20px auto 40px;">
-  <div class="news-item">
-    <h2>Live gaming news loads when JavaScript is enabled</h2>
-    <p>Google News, Reddit community posts, and gaming updates.</p>
-    <div class="date">Auto-refreshed + cached</div>
-  </div>
-</section>
+  <!-- MAIN GRID -->
+  <main>
+    <section class="grid fade-in">
 
-<footer class="footer">© 2025 Gaming Community Hub</footer>
+      <a class="card" href="news.html">
+        <h2>📰 Latest News</h2>
+        <p>Gaming updates, patch notes and headlines.</p>
+      </a>
 
-<script src="script.js" defer></script>
+      <a class="card" href="forums.html">
+        <h2>💬 Forums</h2>
+        <p>Discuss games, share clips and strategies.</p>
+      </a>
+
+      <a class="card" href="memes.html">
+        <h2>🔥 Meme Zone</h2>
+        <p>Fresh gaming memes posted daily.</p>
+      </a>
+
+      <a class="card" href="profiles.html">
+        <h2>🌟 Profiles</h2>
+        <p>Top players, avatars and highlights.</p>
+      </a>
+
+      <a class="card" href="giveaways.html">
+        <h2>🎁 Giveaways</h2>
+        <p>Win gaming rewards monthly.</p>
+      </a>
+
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    © 2025 Gaming Community Hub — Built for players.
+  </footer>
+
+  <script src="script.js" defer></script>
 
 </body>
 </html>
