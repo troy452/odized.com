@@ -345,3 +345,10 @@ body {
   color: var(--muted);
   font-size: 0.85rem;
 }
+.card a {
+  color: white !important;
+}
+
+.card a:hover {
+  color: var(--accent) !important; /* keep hover effect */
+}
