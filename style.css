@@ -394,3 +394,45 @@ body::before {
   from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: translateY(0); }
 }
+/* ============================================================
+   FIX HOME PAGE GIVEAWAYS PREVIEW CENTERING
+============================================================ */
+
+.home-giveaway-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  padding: 0 20px;
+}
+
+.home-giveaway-inner {
+  width: 100%;
+  max-width: 900px;
+  background: var(--panel);
+  padding: 25px;
+  border-radius: 14px;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px rgba(0,0,0,0.35);
+}
+
+.home-giveaway-inner h2 {
+  font-size: 1.9rem;
+  margin-bottom: 8px;
+  color: var(--accent);
+  text-shadow: 0 0 10px var(--accent);
+}
+
+.home-giveaway-inner p {
+  font-size: 1.1rem;
+  color: #e0e0e0;
+  opacity: 0.9;
+  margin-bottom: 12px;
+}
+
+.home-giveaway-inner .btn {
+  display: inline-block;
+  margin: 0 auto;
+}
