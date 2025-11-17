@@ -3,152 +3,75 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Odized - Games & Steam Accounts</title>
+  <title>Odized - Exclusive Steam Accounts & Mods</title>
   
   <style>
-    /* --- 1. BASE STYLES --- */
+    /* --- STYLES --- */
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      background-color: #121212;
-      color: #ffffff;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+    body { background-color: #121212; color: #ffffff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
     a { text-decoration: none; color: inherit; }
 
-    /* --- 2. HEADER --- */
-    header {
-      background-color: #1a1a1a;
-      padding: 15px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid #333;
-    }
+    /* HEADER */
+    header { background-color: #1a1a1a; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #333; }
     .logo { font-size: 24px; font-weight: bold; color: #2ecc71; }
     .logo span { color: #fff; }
-    
     .nav-links { display: flex; gap: 20px; }
     .nav-links a { font-size: 14px; color: #ccc; transition: 0.3s; }
     .nav-links a:hover { color: #2ecc71; }
+    .search-bar input { background: #333; border: none; padding: 8px 15px; border-radius: 20px; color: #fff; outline: none; }
 
-    .search-bar input {
-      background: #333; border: none; padding: 8px 15px;
-      border-radius: 20px; color: #fff; outline: none;
-    }
-
-    /* --- 3. BANNER --- */
+    /* HERO */
     .hero {
       background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('banner.png');
-      background-size: cover; background-position: center;
-      height: 350px;
-      display: flex; flex-direction: column;
-      justify-content: center; align-items: center; text-align: center;
+      background-size: cover; background-position: center; height: 350px;
+      display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
       border-bottom: 2px solid #2ecc71;
     }
     .hero h1, .hero h2 { display: none; }
 
-    /* --- 4. CONTENT --- */
+    /* SECTIONS */
     .section-title { text-align: center; margin: 50px 0 20px; font-size: 28px; font-weight: 700; color: #fff; }
     .sub-nav { text-align: center; margin-bottom: 30px; color: #888; font-size: 14px; }
-    .sub-nav span { margin: 0 10px; cursor: pointer; }
-    .sub-nav span:hover { color: #fff; }
+    .sub-nav span { margin: 0 10px; cursor: pointer; } 
 
-    .game-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 25px;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px 50px;
-    }
+    /* STEAM TABLE STYLES */
+    .steam-section { max-width: 1000px; margin: 0 auto 20px; padding: 0 20px; }
+    .steam-table { width: 100%; border-collapse: collapse; background-color: #1e1e1e; border-radius: 10px; overflow: hidden; border: 1px solid #333; }
+    .steam-table th { background-color: #2ecc71; color: #000; padding: 15px; text-align: left; font-size: 14px; text-transform: uppercase; }
+    .steam-table td { padding: 15px; border-bottom: 1px solid #333; color: #ccc; font-size: 14px; vertical-align: middle; }
+    .steam-table tr:last-child td { border-bottom: none; }
+    .steam-table tr:hover { background-color: #252525; }
+    
+    .account-status { font-weight: bold; font-size: 11px; border: 1px solid; padding: 2px 6px; border-radius: 4px; margin-left: 8px; display: inline-block; }
+    .status-online { color: #2ecc71; border-color: #2ecc71; }
+    .status-offline { color: #e74c3c; border-color: #e74c3c; }
 
-    /* --- 5. CARDS --- */
-    .card {
-      background-color: #1e1e1e; border-radius: 12px; overflow: hidden;
-      transition: transform 0.3s, box-shadow 0.3s; cursor: pointer;
-      border: 1px solid #333; display: flex; flex-direction: column;
+    .password-hidden { background: #000; color: #555; padding: 6px 12px; border-radius: 4px; letter-spacing: 3px; font-family: monospace; margin-right: 10px; }
+    
+    .reveal-btn { background: transparent; border: 1px solid #00eaff; color: #00eaff; padding: 6px 15px; border-radius: 5px; cursor: pointer; font-size: 12px; transition: 0.3s; }
+    .reveal-btn:hover { background: #00eaff; color: #000; }
+    
+    /* Show All Button */
+    .show-more-container { text-align: center; margin-top: 10px; margin-bottom: 60px; }
+    .show-all-btn {
+      background-color: #1e1e1e; border: 1px solid #2ecc71; color: #2ecc71;
+      padding: 10px 30px; border-radius: 30px; cursor: pointer; font-weight: bold;
+      transition: 0.3s;
     }
-    .card:hover {
-      transform: translateY(-7px);
-      box-shadow: 0 10px 20px rgba(46, 204, 113, 0.2);
-      border-color: #2ecc71;
-    }
+    .show-all-btn:hover { background-color: #2ecc71; color: #000; }
+
+    /* GAMES GRID */
+    .game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto; padding: 0 20px 50px; }
+    .card { background-color: #1e1e1e; border-radius: 12px; overflow: hidden; transition: transform 0.3s; cursor: pointer; border: 1px solid #333; display: flex; flex-direction: column; }
+    .card:hover { transform: translateY(-7px); box-shadow: 0 10px 20px rgba(46, 204, 113, 0.2); border-color: #2ecc71; }
     .card-img { width: 100%; height: 200px; object-fit: cover; background-color: #000; }
     .card-info { padding: 15px; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
     .card-title { font-size: 16px; font-weight: bold; margin-bottom: 5px; color: #fff; }
     .card-meta { font-size: 11px; color: #888; margin-bottom: 8px; }
     .stars { color: #f1c40f; margin-bottom: 12px; font-size: 14px; }
-    
-    .download-btn {
-      background-color: #2ecc71; color: #000; border: none;
-      padding: 12px; width: 100%; font-weight: bold; cursor: pointer;
-      border-radius: 6px; text-transform: uppercase; font-size: 13px;
-      letter-spacing: 0.5px; transition: background 0.2s;
-    }
+    .download-btn { background-color: #2ecc71; color: #000; border: none; padding: 12px; width: 100%; font-weight: bold; cursor: pointer; border-radius: 6px; text-transform: uppercase; font-size: 13px; transition: background 0.2s; }
     .download-btn:hover { background-color: #27ae60; }
 
-    /* --- 6. NEW STEAM SECTION --- */
-    .steam-section {
-      max-width: 1000px;
-      margin: 0 auto 80px;
-      padding: 0 20px;
-    }
-    .steam-table {
-      width: 100%;
-      border-collapse: collapse;
-      background-color: #1e1e1e;
-      border-radius: 10px;
-      overflow: hidden;
-      border: 1px solid #333;
-    }
-    .steam-table th {
-      background-color: #2ecc71;
-      color: #000;
-      padding: 15px;
-      text-align: left;
-      font-size: 14px;
-      text-transform: uppercase;
-    }
-    .steam-table td {
-      padding: 15px;
-      border-bottom: 1px solid #333;
-      color: #ccc;
-      font-size: 14px;
-    }
-    .steam-table tr:last-child td { border-bottom: none; }
-    .steam-table tr:hover { background-color: #252525; }
-    
-    .account-status {
-      color: #2ecc71;
-      font-weight: bold;
-      font-size: 12px;
-      border: 1px solid #2ecc71;
-      padding: 2px 8px;
-      border-radius: 10px;
-    }
-
-    .password-hidden {
-      background: #000;
-      color: #555;
-      padding: 5px 10px;
-      border-radius: 4px;
-      letter-spacing: 3px;
-      margin-right: 10px;
-    }
-
-    .reveal-btn {
-      background: transparent;
-      border: 1px solid #00eaff;
-      color: #00eaff;
-      padding: 5px 15px;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 12px;
-      transition: 0.3s;
-    }
-    .reveal-btn:hover { background: #00eaff; color: #000; }
-
-    /* --- FOOTER --- */
     footer { background-color: #000; padding: 30px; text-align: center; color: #444; font-size: 12px; }
 
     @media (max-width: 768px) {
@@ -160,9 +83,68 @@
   </style>
 
   <script type="text/javascript">
-      function openLocker() {
-          window.open("https://applocked.org/cl/i/gr6w61", "_blank");
+    var locker_url = "https://applocked.org/cl/i/gr6w61";
+    var allAccountsData = []; // Stores all loaded data
+    var isShowingAll = false;
+
+    // Open Locker
+    function openLocker() {
+      window.open(locker_url, "_blank");
+    }
+
+    // Load Data on Start
+    async function loadAccounts() {
+      try {
+        const response = await fetch('accounts.json');
+        allAccountsData = await response.json();
+        renderTable(5); // Initial load: Show only 5
+        
+        // Hide "Show All" button if there are 5 or fewer accounts
+        if (allAccountsData.length <= 5) {
+            document.getElementById('showAllBtn').style.display = 'none';
+        }
+      } catch (error) {
+        console.error('Error loading accounts:', error);
+        document.getElementById('account-list').innerHTML = '<tr><td colspan="3" style="text-align:center;">Failed to load.</td></tr>';
       }
+    }
+
+    // Render Table Rows
+    function renderTable(limit) {
+      const tableBody = document.getElementById('account-list');
+      tableBody.innerHTML = ''; // Clear current
+
+      // Determine how many to show
+      const count = limit === -1 ? allAccountsData.length : Math.min(limit, allAccountsData.length);
+
+      for (let i = 0; i < count; i++) {
+        const acc = allAccountsData[i];
+        const statusClass = acc.status === 'Online' ? 'status-online' : 'status-offline';
+        
+        const row = `
+          <tr>
+            <td>
+              ${acc.username}
+              <span class="account-status ${statusClass}">${acc.status}</span>
+            </td>
+            <td>${acc.games}</td>
+            <td>
+              <span class="password-hidden">******</span>
+              <button class="reveal-btn" onclick="openLocker()">REVEAL</button>
+            </td>
+          </tr>
+        `;
+        tableBody.innerHTML += row;
+      }
+    }
+
+    // Button Click: Show All
+    function showAllAccounts() {
+      renderTable(-1); // -1 means show all
+      document.getElementById('showAllBtn').style.display = 'none'; // Hide button after clicking
+    }
+
+    window.onload = loadAccounts;
   </script>
 
 </head>
@@ -172,8 +154,8 @@
     <div class="logo">ODIZED<span>.COM</span></div>
     <nav class="nav-links">
       <a href="#">Home</a>
-      <a href="#">Mods</a>
-      <a href="#">Accounts</a>
+      <a href="#">Steam Accounts</a>
+      <a href="#">Mobile Games</a>
     </nav>
     <div class="search-bar">
       <input type="text" placeholder="Search...">
@@ -184,196 +166,8 @@
     <h1>ODIZED</h1>
   </section>
 
-  <h2 class="section-title">Top 20 Mobile Games & Mods</h2>
-  <div class="sub-nav">
-    <span>Android Games</span> | <span>iOS Games</span>
-  </div>
-
-  <div class="game-grid">
-    <div class="card" onclick="openLocker()">
-      <img src="fortnite.jpg" class="card-img" alt="Fortnite">
-      <div class="card-info">
-        <div class="card-title">Fortnite Mobile</div>
-        <div class="card-meta">v32.00 • Battle Royale</div>
-        <div class="stars">★★★★☆</div>
-        <button class="download-btn">Download</button>
-      </div>
-    </div>
-    <div class="card" onclick="openLocker()">
-      <img src="gtav.jpeg" class="card-img" alt="GTA V">
-      <div class="card-info">
-        <div class="card-title">GTA V Mobile</div>
-        <div class="card-meta">v1.3.0 • Open World</div>
-        <div class="stars">★★★★★</div>
-        <button class="download-btn">Download</button>
-      </div>
-    </div>
-    <div class="card" onclick="openLocker()">
-      <img src="gta4.png" class="card-img" alt="GTA 4">
-      <div class="card-info">
-        <div class="card-title">GTA 4 Mobile</div>
-        <div class="card-meta">v1.03 • Action</div>
-        <div class="stars">★★★★☆</div>
-        <button class="download-btn">Download</button>
-      </div>
-    </div>
-    <div class="card" onclick="openLocker()">
-      <img src="Roblox_Logo_2022.jpg" class="card-img" alt="Roblox">
-      <div class="card-info">
-        <div class="card-title">Roblox</div>
-        <div class="card-meta">Mega Mod Menu</div>
-        <div class="stars">★★★★★</div>
-        <button class="download-btn">Download</button>
-      </div>
-    </div>
-    <div class="card" onclick="openLocker()">
-      <img src="spiderman.png" class="card-img" alt="Spider-Man 2">
-      <div class="card-info">
-        <div class="card-title">Spider-Man 2</div>
-        <div class="card-meta">Mobile Port • Hero</div>
-        <div class="stars">★★★★★</div>
-        <button class="download-btn">Download</button>
-      </div>
-    </div>
-     <div class="card" onclick="openLocker()">
-      <img src="rdr2.png" class="card-img" alt="RDR2">
-      <div class="card-info">
-        <div class="card-title">Red Dead Redemption 2</div>
-        <div class="card-meta">Cloud Edition</div>
-        <div class="stars">★★★★★</div>
-        <button class="download-btn">Download</button>
-      </div>
-    </div>
-    <div class="card" onclick="openLocker()">
-      <img src="minecraft.jpeg" class="card-img" alt="Minecraft">
-      <div class="card-info">
-        <div class="card-title">Minecraft PE</div>
-        <div class="card-meta">v1.21 • Unlocked</div>
-        <div class="stars">★★★★★</div>
-        <button class="download-btn">Download</button>
-      </div>
-    </div>
-    <div class="card" onclick="openLocker()">
-      <img src="cod.png" class="card-img" alt="COD Mobile">
-      <div class="card-info">
-        <div class="card-title">Warzone Mobile</div>
-        <div class="card-meta">CP Generator</div>
-        <div class="stars">★★★★☆</div>
-        <button class="download-btn">Download</button>
-      </div>
-    </div>
-    <div class="card" onclick="openLocker()">
-      <img src="images.png" class="card-img" alt="FC Mobile">
-      <div class="card-info">
-        <div class="card-title">FC Mobile 25</div>
-        <div class="card-meta">Unlimited Coins</div>
-        <div class="stars">★★★★☆</div>
-        <button class="download-btn">Download</button>
-      </div>
-    </div>
-    <div class="card" onclick="openLocker()">
-      <img src="pubg.png" class="card-img" alt="PUBG">
-      <div class="card-info">
-        <div class="card-title">PUBG Mobile</div>
-        <div class="card-meta">UC Hack Tool</div>
-        <div class="stars">★★★★★</div>
-        <button class="download-btn">Download</button>
-      </div>
-    </div>
-    <div class="card" onclick="openLocker()">
-      <img src="genshin.png" class="card-img" alt="Genshin">
-      <div class="card-info">
-        <div class="card-title">Genshin Impact</div>
-        <div class="card-meta">Primogem Mod</div>
-        <div class="stars">★★★★★</div>
-        <button class="download-btn">Download</button>
-      </div>
-    </div>
-    <div class="card" onclick="openLocker()">
-      <img src="freefire.png" class="card-img" alt="Free Fire">
-      <div class="card-info">
-        <div class="card-title">Free Fire MAX</div>
-        <div class="card-meta">Aimbot Menu</div>
-        <div class="stars">★★★★☆</div>
-        <button class="download-btn">Download</button>
-      </div>
-    </div>
-    <div class="card" onclick="openLocker()">
-      <img src="brawl.png" class="card-img" alt="Brawl Stars">
-      <div class="card-info">
-        <div class="card-title">Brawl Stars</div>
-        <div class="card-meta">Gem Server</div>
-        <div class="stars">★★★★★</div>
-        <button class="download-btn">Download</button>
-      </div>
-    </div>
-    <div class="card" onclick="openLocker()">
-      <img src="nba.png" class="card-img" alt="NBA 2K">
-      <div class="card-info">
-        <div class="card-title">NBA 2K25 Mobile</div>
-        <div class="card-meta">Arcade Edition</div>
-        <div class="stars">★★★★☆</div>
-        <button class="download-btn">Download</button>
-      </div>
-    </div>
-    <div class="card" onclick="openLocker()">
-      <img src="forza.png" class="card-img" alt="Forza">
-      <div class="card-info">
-        <div class="card-title">Forza Horizon 5</div>
-        <div class="card-meta">Mobile Port</div>
-        <div class="stars">★★★★★</div>
-        <button class="download-btn">Download</button>
-      </div>
-    </div>
-    <div class="card" onclick="openLocker()">
-      <img src="assassin.png" class="card-img" alt="Assassins Creed">
-      <div class="card-info">
-        <div class="card-title">AC Mirage</div>
-        <div class="card-meta">Android/iOS</div>
-        <div class="stars">★★★★☆</div>
-        <button class="download-btn">Download</button>
-      </div>
-    </div>
-    <div class="card" onclick="openLocker()">
-      <img src="cyber77.png" class="card-img" alt="Cyberpunk">
-      <div class="card-info">
-        <div class="card-title">Cyberpunk 2077</div>
-        <div class="card-meta">Cloud Stream</div>
-        <div class="stars">★★★★★</div>
-        <button class="download-btn">Download</button>
-      </div>
-    </div>
-    <div class="card" onclick="openLocker()">
-      <img src="tlou.jpg" class="card-img" alt="TLOU">
-      <div class="card-info">
-        <div class="card-title">The Last of Us</div>
-        <div class="card-meta">Part 1 Mobile</div>
-        <div class="stars">★★★★★</div>
-        <button class="download-btn">Download</button>
-      </div>
-    </div>
-    <div class="card" onclick="openLocker()">
-      <img src="valorent.jpg" class="card-img" alt="Valorant">
-      <div class="card-info">
-        <div class="card-title">Valorant Mobile</div>
-        <div class="card-meta">Beta Access</div>
-        <div class="stars">★★★★☆</div>
-        <button class="download-btn">Download</button>
-      </div>
-    </div>
-    <div class="card" onclick="openLocker()">
-      <img src="apex.png" class="card-img" alt="Apex Legends">
-      <div class="card-info">
-        <div class="card-title">Apex Legends</div>
-        <div class="card-meta">Mobile Rebirth</div>
-        <div class="stars">★★★★☆</div>
-        <button class="download-btn">Download</button>
-      </div>
-    </div>
-  </div>
-
-  <h2 class="section-title" style="color: #00eaff;">FREE STEAM ACCOUNTS</h2>
-  <p style="text-align:center; color:#888; margin-bottom:30px;">Updated Daily • Click Reveal to get password</p>
+  <h2 class="section-title" style="color: #00eaff; margin-top: 40px;">FREE STEAM ACCOUNTS</h2>
+  <p style="text-align:center; color:#888; margin-bottom:30px;">Updated Daily • Click Reveal to Unlock Password</p>
 
   <div class="steam-section">
     <table class="steam-table">
@@ -384,64 +178,41 @@
           <th>Password</th>
         </tr>
       </thead>
-      <tbody>
-        <tr>
-          <td>
-            GamerKing_99
-            <span class="account-status">Online</span>
-          </td>
-          <td>Black Myth: Wukong, Elden Ring</td>
-          <td>
-            <span class="password-hidden">******</span>
-            <button class="reveal-btn" onclick="openLocker()">REVEAL</button>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            SniperWolf22
-            <span class="account-status">Offline</span>
-          </td>
-          <td>COD: MW3, Cyberpunk 2077</td>
-          <td>
-            <span class="password-hidden">******</span>
-            <button class="reveal-btn" onclick="openLocker()">REVEAL</button>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            RacerX_Pro
-            <span class="account-status">Online</span>
-          </td>
-          <td>Forza Horizon 5, Assetto Corsa</td>
-          <td>
-            <span class="password-hidden">******</span>
-            <button class="reveal-btn" onclick="openLocker()">REVEAL</button>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            ShadowHunter
-            <span class="account-status">Online</span>
-          </td>
-          <td>God of War Ragnarok, Spider-Man 2</td>
-          <td>
-            <span class="password-hidden">******</span>
-            <button class="reveal-btn" onclick="openLocker()">REVEAL</button>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            ZombieSlayer
-            <span class="account-status">Offline</span>
-          </td>
-          <td>Resident Evil 4 Remake, Left 4 Dead</td>
-          <td>
-            <span class="password-hidden">******</span>
-            <button class="reveal-btn" onclick="openLocker()">REVEAL</button>
-          </td>
-        </tr>
+      <tbody id="account-list">
+        <tr><td colspan="3" style="text-align:center; padding:20px;">Loading Accounts...</td></tr>
       </tbody>
     </table>
+  </div>
+
+  <div class="show-more-container">
+    <button id="showAllBtn" class="show-all-btn" onclick="showAllAccounts()">SHOW ALL ACCOUNTS</button>
+  </div>
+
+
+  <h2 class="section-title">Top 20 Mobile Games & Mods</h2>
+  <div class="sub-nav"><span>Android Games</span> | <span>iOS Games</span></div>
+
+  <div class="game-grid">
+    <div class="card" onclick="openLocker()"><img src="fortnite.jpg" class="card-img"><div class="card-info"><div class="card-title">Fortnite Mobile</div><div class="stars">★★★★☆</div><button class="download-btn">Download</button></div></div>
+    <div class="card" onclick="openLocker()"><img src="gtav.jpeg" class="card-img"><div class="card-info"><div class="card-title">GTA V Mobile</div><div class="stars">★★★★★</div><button class="download-btn">Download</button></div></div>
+    <div class="card" onclick="openLocker()"><img src="gta4.png" class="card-img"><div class="card-info"><div class="card-title">GTA 4 Mobile</div><div class="stars">★★★★☆</div><button class="download-btn">Download</button></div></div>
+    <div class="card" onclick="openLocker()"><img src="Roblox_Logo_2022.jpg" class="card-img"><div class="card-info"><div class="card-title">Roblox Mod</div><div class="stars">★★★★★</div><button class="download-btn">Download</button></div></div>
+    <div class="card" onclick="openLocker()"><img src="spiderman.png" class="card-img"><div class="card-info"><div class="card-title">Spider-Man 2</div><div class="stars">★★★★★</div><button class="download-btn">Download</button></div></div>
+    <div class="card" onclick="openLocker()"><img src="rdr2.png" class="card-img"><div class="card-info"><div class="card-title">RDR 2 Cloud</div><div class="stars">★★★★★</div><button class="download-btn">Download</button></div></div>
+    <div class="card" onclick="openLocker()"><img src="minecraft.jpeg" class="card-img"><div class="card-info"><div class="card-title">Minecraft PE</div><div class="stars">★★★★★</div><button class="download-btn">Download</button></div></div>
+    <div class="card" onclick="openLocker()"><img src="cod.png" class="card-img"><div class="card-info"><div class="card-title">Warzone Mobile</div><div class="stars">★★★★☆</div><button class="download-btn">Download</button></div></div>
+    <div class="card" onclick="openLocker()"><img src="images.png" class="card-img"><div class="card-info"><div class="card-title">FC Mobile 25</div><div class="stars">★★★★☆</div><button class="download-btn">Download</button></div></div>
+    <div class="card" onclick="openLocker()"><img src="pubg.png" class="card-img"><div class="card-info"><div class="card-title">PUBG Mobile</div><div class="stars">★★★★★</div><button class="download-btn">Download</button></div></div>
+    <div class="card" onclick="openLocker()"><img src="genshin.png" class="card-img"><div class="card-info"><div class="card-title">Genshin Impact</div><div class="stars">★★★★★</div><button class="download-btn">Download</button></div></div>
+    <div class="card" onclick="openLocker()"><img src="freefire.png" class="card-img"><div class="card-info"><div class="card-title">Free Fire MAX</div><div class="stars">★★★★☆</div><button class="download-btn">Download</button></div></div>
+    <div class="card" onclick="openLocker()"><img src="brawl.png" class="card-img"><div class="card-info"><div class="card-title">Brawl Stars</div><div class="stars">★★★★★</div><button class="download-btn">Download</button></div></div>
+    <div class="card" onclick="openLocker()"><img src="nba.png" class="card-img"><div class="card-info"><div class="card-title">NBA 2K25</div><div class="stars">★★★★☆</div><button class="download-btn">Download</button></div></div>
+    <div class="card" onclick="openLocker()"><img src="forza.png" class="card-img"><div class="card-info"><div class="card-title">Forza Horizon 5</div><div class="stars">★★★★★</div><button class="download-btn">Download</button></div></div>
+    <div class="card" onclick="openLocker()"><img src="assassin.png" class="card-img"><div class="card-info"><div class="card-title">AC Mirage</div><div class="stars">★★★★☆</div><button class="download-btn">Download</button></div></div>
+    <div class="card" onclick="openLocker()"><img src="cyber77.png" class="card-img"><div class="card-info"><div class="card-title">Cyberpunk 2077</div><div class="stars">★★★★★</div><button class="download-btn">Download</button></div></div>
+    <div class="card" onclick="openLocker()"><img src="tlou.jpg" class="card-img"><div class="card-info"><div class="card-title">The Last of Us</div><div class="stars">★★★★★</div><button class="download-btn">Download</button></div></div>
+    <div class="card" onclick="openLocker()"><img src="valorent.jpg" class="card-img"><div class="card-info"><div class="card-title">Valorant Mobile</div><div class="stars">★★★★☆</div><button class="download-btn">Download</button></div></div>
+    <div class="card" onclick="openLocker()"><img src="apex.png" class="card-img"><div class="card-info"><div class="card-title">Apex Legends</div><div class="stars">★★★★☆</div><button class="download-btn">Download</button></div></div>
   </div>
 
   <footer>
