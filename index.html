@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Odized - Top Mobile Games</title>
+  <title>Odized - Games & Steam Accounts</title>
   
   <style>
-    /* --- STYLES --- */
+    /* --- 1. BASE STYLES --- */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       background-color: #121212;
@@ -15,6 +15,7 @@
     }
     a { text-decoration: none; color: inherit; }
 
+    /* --- 2. HEADER --- */
     header {
       background-color: #1a1a1a;
       padding: 15px 20px;
@@ -35,6 +36,7 @@
       border-radius: 20px; color: #fff; outline: none;
     }
 
+    /* --- 3. BANNER --- */
     .hero {
       background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('banner.png');
       background-size: cover; background-position: center;
@@ -45,7 +47,8 @@
     }
     .hero h1, .hero h2 { display: none; }
 
-    .section-title { text-align: center; margin: 40px 0 20px; font-size: 26px; font-weight: 700; }
+    /* --- 4. CONTENT --- */
+    .section-title { text-align: center; margin: 50px 0 20px; font-size: 28px; font-weight: 700; color: #fff; }
     .sub-nav { text-align: center; margin-bottom: 30px; color: #888; font-size: 14px; }
     .sub-nav span { margin: 0 10px; cursor: pointer; }
     .sub-nav span:hover { color: #fff; }
@@ -56,9 +59,10 @@
       gap: 25px;
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 20px 80px;
+      padding: 0 20px 50px;
     }
 
+    /* --- 5. CARDS --- */
     .card {
       background-color: #1e1e1e; border-radius: 12px; overflow: hidden;
       transition: transform 0.3s, box-shadow 0.3s; cursor: pointer;
@@ -83,12 +87,75 @@
     }
     .download-btn:hover { background-color: #27ae60; }
 
+    /* --- 6. NEW STEAM SECTION --- */
+    .steam-section {
+      max-width: 1000px;
+      margin: 0 auto 80px;
+      padding: 0 20px;
+    }
+    .steam-table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #1e1e1e;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid #333;
+    }
+    .steam-table th {
+      background-color: #2ecc71;
+      color: #000;
+      padding: 15px;
+      text-align: left;
+      font-size: 14px;
+      text-transform: uppercase;
+    }
+    .steam-table td {
+      padding: 15px;
+      border-bottom: 1px solid #333;
+      color: #ccc;
+      font-size: 14px;
+    }
+    .steam-table tr:last-child td { border-bottom: none; }
+    .steam-table tr:hover { background-color: #252525; }
+    
+    .account-status {
+      color: #2ecc71;
+      font-weight: bold;
+      font-size: 12px;
+      border: 1px solid #2ecc71;
+      padding: 2px 8px;
+      border-radius: 10px;
+    }
+
+    .password-hidden {
+      background: #000;
+      color: #555;
+      padding: 5px 10px;
+      border-radius: 4px;
+      letter-spacing: 3px;
+      margin-right: 10px;
+    }
+
+    .reveal-btn {
+      background: transparent;
+      border: 1px solid #00eaff;
+      color: #00eaff;
+      padding: 5px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: 0.3s;
+    }
+    .reveal-btn:hover { background: #00eaff; color: #000; }
+
+    /* --- FOOTER --- */
     footer { background-color: #000; padding: 30px; text-align: center; color: #444; font-size: 12px; }
 
     @media (max-width: 768px) {
       header { flex-direction: column; gap: 15px; }
       .nav-links { display: none; }
       .hero { height: 200px; }
+      .steam-table th, .steam-table td { font-size: 12px; padding: 10px; }
     }
   </style>
 
@@ -105,11 +172,11 @@
     <div class="logo">ODIZED<span>.COM</span></div>
     <nav class="nav-links">
       <a href="#">Home</a>
-      <a href="#">All Games</a>
-      <a href="#">New Releases</a>
+      <a href="#">Mods</a>
+      <a href="#">Accounts</a>
     </nav>
     <div class="search-bar">
-      <input type="text" placeholder="Search games...">
+      <input type="text" placeholder="Search...">
     </div>
   </header>
 
@@ -123,7 +190,6 @@
   </div>
 
   <div class="game-grid">
-
     <div class="card" onclick="openLocker()">
       <img src="fortnite.jpg" class="card-img" alt="Fortnite">
       <div class="card-info">
@@ -133,7 +199,6 @@
         <button class="download-btn">Download</button>
       </div>
     </div>
-
     <div class="card" onclick="openLocker()">
       <img src="gtav.jpeg" class="card-img" alt="GTA V">
       <div class="card-info">
@@ -143,7 +208,6 @@
         <button class="download-btn">Download</button>
       </div>
     </div>
-
     <div class="card" onclick="openLocker()">
       <img src="gta4.png" class="card-img" alt="GTA 4">
       <div class="card-info">
@@ -153,7 +217,6 @@
         <button class="download-btn">Download</button>
       </div>
     </div>
-
     <div class="card" onclick="openLocker()">
       <img src="Roblox_Logo_2022.jpg" class="card-img" alt="Roblox">
       <div class="card-info">
@@ -163,7 +226,6 @@
         <button class="download-btn">Download</button>
       </div>
     </div>
-
     <div class="card" onclick="openLocker()">
       <img src="spiderman.png" class="card-img" alt="Spider-Man 2">
       <div class="card-info">
@@ -173,7 +235,6 @@
         <button class="download-btn">Download</button>
       </div>
     </div>
-    
      <div class="card" onclick="openLocker()">
       <img src="rdr2.png" class="card-img" alt="RDR2">
       <div class="card-info">
@@ -183,7 +244,6 @@
         <button class="download-btn">Download</button>
       </div>
     </div>
-
     <div class="card" onclick="openLocker()">
       <img src="minecraft.jpeg" class="card-img" alt="Minecraft">
       <div class="card-info">
@@ -193,7 +253,6 @@
         <button class="download-btn">Download</button>
       </div>
     </div>
-
     <div class="card" onclick="openLocker()">
       <img src="cod.png" class="card-img" alt="COD Mobile">
       <div class="card-info">
@@ -203,7 +262,6 @@
         <button class="download-btn">Download</button>
       </div>
     </div>
-
     <div class="card" onclick="openLocker()">
       <img src="images.png" class="card-img" alt="FC Mobile">
       <div class="card-info">
@@ -213,7 +271,6 @@
         <button class="download-btn">Download</button>
       </div>
     </div>
-
     <div class="card" onclick="openLocker()">
       <img src="pubg.png" class="card-img" alt="PUBG">
       <div class="card-info">
@@ -223,7 +280,6 @@
         <button class="download-btn">Download</button>
       </div>
     </div>
-
     <div class="card" onclick="openLocker()">
       <img src="genshin.png" class="card-img" alt="Genshin">
       <div class="card-info">
@@ -233,7 +289,6 @@
         <button class="download-btn">Download</button>
       </div>
     </div>
-
     <div class="card" onclick="openLocker()">
       <img src="freefire.png" class="card-img" alt="Free Fire">
       <div class="card-info">
@@ -243,7 +298,6 @@
         <button class="download-btn">Download</button>
       </div>
     </div>
-
     <div class="card" onclick="openLocker()">
       <img src="brawl.png" class="card-img" alt="Brawl Stars">
       <div class="card-info">
@@ -253,7 +307,6 @@
         <button class="download-btn">Download</button>
       </div>
     </div>
-
     <div class="card" onclick="openLocker()">
       <img src="nba.png" class="card-img" alt="NBA 2K">
       <div class="card-info">
@@ -263,7 +316,6 @@
         <button class="download-btn">Download</button>
       </div>
     </div>
-
     <div class="card" onclick="openLocker()">
       <img src="forza.png" class="card-img" alt="Forza">
       <div class="card-info">
@@ -273,7 +325,6 @@
         <button class="download-btn">Download</button>
       </div>
     </div>
-
     <div class="card" onclick="openLocker()">
       <img src="assassin.png" class="card-img" alt="Assassins Creed">
       <div class="card-info">
@@ -283,7 +334,6 @@
         <button class="download-btn">Download</button>
       </div>
     </div>
-
     <div class="card" onclick="openLocker()">
       <img src="cyber77.png" class="card-img" alt="Cyberpunk">
       <div class="card-info">
@@ -293,7 +343,6 @@
         <button class="download-btn">Download</button>
       </div>
     </div>
-
     <div class="card" onclick="openLocker()">
       <img src="tlou.jpg" class="card-img" alt="TLOU">
       <div class="card-info">
@@ -303,7 +352,6 @@
         <button class="download-btn">Download</button>
       </div>
     </div>
-
     <div class="card" onclick="openLocker()">
       <img src="valorent.jpg" class="card-img" alt="Valorant">
       <div class="card-info">
@@ -313,7 +361,6 @@
         <button class="download-btn">Download</button>
       </div>
     </div>
-
     <div class="card" onclick="openLocker()">
       <img src="apex.png" class="card-img" alt="Apex Legends">
       <div class="card-info">
@@ -323,7 +370,78 @@
         <button class="download-btn">Download</button>
       </div>
     </div>
+  </div>
 
+  <h2 class="section-title" style="color: #00eaff;">FREE STEAM ACCOUNTS</h2>
+  <p style="text-align:center; color:#888; margin-bottom:30px;">Updated Daily • Click Reveal to get password</p>
+
+  <div class="steam-section">
+    <table class="steam-table">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Top Games Included</th>
+          <th>Password</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            GamerKing_99
+            <span class="account-status">Online</span>
+          </td>
+          <td>Black Myth: Wukong, Elden Ring</td>
+          <td>
+            <span class="password-hidden">******</span>
+            <button class="reveal-btn" onclick="openLocker()">REVEAL</button>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            SniperWolf22
+            <span class="account-status">Offline</span>
+          </td>
+          <td>COD: MW3, Cyberpunk 2077</td>
+          <td>
+            <span class="password-hidden">******</span>
+            <button class="reveal-btn" onclick="openLocker()">REVEAL</button>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            RacerX_Pro
+            <span class="account-status">Online</span>
+          </td>
+          <td>Forza Horizon 5, Assetto Corsa</td>
+          <td>
+            <span class="password-hidden">******</span>
+            <button class="reveal-btn" onclick="openLocker()">REVEAL</button>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            ShadowHunter
+            <span class="account-status">Online</span>
+          </td>
+          <td>God of War Ragnarok, Spider-Man 2</td>
+          <td>
+            <span class="password-hidden">******</span>
+            <button class="reveal-btn" onclick="openLocker()">REVEAL</button>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            ZombieSlayer
+            <span class="account-status">Offline</span>
+          </td>
+          <td>Resident Evil 4 Remake, Left 4 Dead</td>
+          <td>
+            <span class="password-hidden">******</span>
+            <button class="reveal-btn" onclick="openLocker()">REVEAL</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
   <footer>
