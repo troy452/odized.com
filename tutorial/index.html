@@ -10,27 +10,32 @@
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
-      background: #0f0f0f;
       color: #fff;
       line-height: 1.6;
+
+      /* 👇 Your background image */
+      background: url("loudplay.jpg") no-repeat center center fixed;
+      background-size: cover;
     }
 
     header {
       padding: 20px;
       text-align: center;
-      background: #1b1b1b;
+      background: rgba(0,0,0,0.6);
       font-size: 22px;
       font-weight: bold;
       letter-spacing: 1px;
+      backdrop-filter: blur(6px);
     }
 
     .container {
       max-width: 800px;
       margin: 30px auto;
-      background: #1a1a1a;
+      background: rgba(0,0,0,0.55);
       padding: 25px;
       border-radius: 10px;
       border: 1px solid #333;
+      backdrop-filter: blur(6px);
     }
 
     h2 {
@@ -38,7 +43,7 @@
     }
 
     .step {
-      background: #111;
+      background: rgba(0,0,0,0.5);
       padding: 15px;
       border-radius: 8px;
       margin-bottom: 15px;
@@ -63,7 +68,9 @@
     footer {
       text-align: center;
       padding: 20px;
-      color: #777;
+      color: #ccc;
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(6px);
     }
   </style>
 </head>
@@ -79,7 +86,7 @@
 
   <div class="step">
     <h3>Step 1 — Prepare Your Device</h3>
-    <p>Make sure your phone has available storage and stable internet.</p>
+    <p>Make sure your device has enough storage and stable internet.</p>
   </div>
 
   <div class="step">
