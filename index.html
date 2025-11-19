@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Odized - Exclusive Steam Accounts & Mods</title>
+  <title>Odized - Exclusive Mods & Accounts</title>
   
   <style>
     /* --- STYLES --- */
@@ -33,6 +33,40 @@
     .section-title { text-align: center; margin: 50px 0 20px; font-size: 28px; font-weight: 700; color: #fff; }
     .sub-nav { text-align: center; margin-bottom: 30px; color: #888; font-size: 14px; }
     .sub-nav span { margin: 0 10px; cursor: pointer; } 
+
+    /* --- NEW FEATURED ROBLOX SECTION --- */
+    .featured-wrapper { max-width: 1000px; margin: 40px auto 0; padding: 0 20px; }
+    .featured-box {
+        background: linear-gradient(135deg, #1e1e1e 0%, #252525 100%);
+        border: 2px solid #e74c3c; /* Roblox Red Color */
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        box-shadow: 0 0 25px rgba(231, 76, 60, 0.15);
+        transition: transform 0.3s;
+    }
+    .featured-box:hover { transform: translateY(-5px); box-shadow: 0 0 35px rgba(231, 76, 60, 0.3); }
+    
+    .feat-img-container { width: 40%; height: 280px; overflow: hidden; position: relative; }
+    .feat-img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+    
+    .feat-info { padding: 30px; width: 60%; }
+    .feat-tag { 
+        background-color: #e74c3c; color: #fff; padding: 5px 10px; 
+        font-size: 12px; font-weight: bold; border-radius: 4px; 
+        display: inline-block; margin-bottom: 10px;
+    }
+    .feat-title { font-size: 32px; font-weight: 800; margin-bottom: 10px; color: #fff; line-height: 1.2; }
+    .feat-desc { color: #ccc; margin-bottom: 25px; font-size: 15px; line-height: 1.6; }
+    
+    .feat-btn {
+        background-color: #e74c3c; color: #fff; border: none;
+        padding: 15px 35px; font-weight: bold; border-radius: 50px;
+        cursor: pointer; font-size: 16px; transition: 0.3s;
+        text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+    }
+    .feat-btn:hover { background-color: #c0392b; transform: scale(1.05); }
 
     /* STEAM TABLE STYLES */
     .steam-section { max-width: 1000px; margin: 0 auto 20px; padding: 0 20px; }
@@ -79,17 +113,33 @@
       .nav-links { display: none; }
       .hero { height: 200px; }
       .steam-table th, .steam-table td { font-size: 12px; padding: 10px; }
+      
+      /* Mobile Featured Box */
+      .featured-box { flex-direction: column; text-align: center; }
+      .feat-img-container { width: 100%; height: 200px; }
+      .feat-info { width: 100%; padding: 25px 15px; }
+      .feat-title { font-size: 24px; }
     }
   </style>
 
   <script type="text/javascript">
-    var locker_url = "https://applocked.org/cl/i/gr6w61";
-    var allAccountsData = []; // Stores all loaded data
+    // Standard Locker (for general downloads)
+    var general_locker_url = "https://applocked.org/cl/i/gr6w61";
+    
+    // ROBLOX SPECIFIC LOCKER (From your screenshot)
+    var roblox_locker_url = "https://applocked.org/cl/i/82d58d";
+
+    var allAccountsData = [];
     var isShowingAll = false;
 
-    // Open Locker
+    // Function for General Locker
     function openLocker() {
-      window.open(locker_url, "_blank");
+      window.open(general_locker_url, "_blank");
+    }
+
+    // Function SPECIFICALLY for the new Roblox Section
+    function openRobloxLocker() {
+      window.open(roblox_locker_url, "_blank");
     }
 
     // Load Data on Start
@@ -99,7 +149,6 @@
         allAccountsData = await response.json();
         renderTable(5); // Initial load: Show only 5
         
-        // Hide "Show All" button if there are 5 or fewer accounts
         if (allAccountsData.length <= 5) {
             document.getElementById('showAllBtn').style.display = 'none';
         }
@@ -109,12 +158,10 @@
       }
     }
 
-    // Render Table Rows
     function renderTable(limit) {
       const tableBody = document.getElementById('account-list');
-      tableBody.innerHTML = ''; // Clear current
+      tableBody.innerHTML = '';
 
-      // Determine how many to show
       const count = limit === -1 ? allAccountsData.length : Math.min(limit, allAccountsData.length);
 
       for (let i = 0; i < count; i++) {
@@ -138,10 +185,9 @@
       }
     }
 
-    // Button Click: Show All
     function showAllAccounts() {
-      renderTable(-1); // -1 means show all
-      document.getElementById('showAllBtn').style.display = 'none'; // Hide button after clicking
+      renderTable(-1); 
+      document.getElementById('showAllBtn').style.display = 'none';
     }
 
     window.onload = loadAccounts;
@@ -166,7 +212,21 @@
     <h1>ODIZED</h1>
   </section>
 
-  <h2 class="section-title" style="color: #00eaff; margin-top: 40px;">FREE STEAM ACCOUNTS</h2>
+  <div class="featured-wrapper">
+    <div class="featured-box">
+        <div class="feat-img-container">
+            <img src="Roblox_Logo_2022.jpg" class="feat-img" alt="Roblox Mod Menu">
+        </div>
+        <div class="feat-info">
+            <span class="feat-tag">TRENDING NOW</span>
+            <h2 class="feat-title">ROBLOX MEGA MOD MENU</h2>
+            <p class="feat-desc">Unlock exclusive features: God Mode, Unlimited Robux, Fly Hack, Noclip, and Auto-Farm. Safe, Anti-Ban protection included.</p>
+            <button class="feat-btn" onclick="openRobloxLocker()">DOWNLOAD MOD MENU</button>
+        </div>
+    </div>
+  </div>
+
+  <h2 class="section-title" style="color: #00eaff; margin-top: 50px;">FREE STEAM ACCOUNTS</h2>
   <p style="text-align:center; color:#888; margin-bottom:30px;">Updated Daily • Click Reveal to Unlock Password</p>
 
   <div class="steam-section">
@@ -196,7 +256,6 @@
     <div class="card" onclick="openLocker()"><img src="fortnite.jpg" class="card-img"><div class="card-info"><div class="card-title">Fortnite Mobile</div><div class="stars">★★★★☆</div><button class="download-btn">Download</button></div></div>
     <div class="card" onclick="openLocker()"><img src="gtav.jpeg" class="card-img"><div class="card-info"><div class="card-title">GTA V Mobile</div><div class="stars">★★★★★</div><button class="download-btn">Download</button></div></div>
     <div class="card" onclick="openLocker()"><img src="gta4.png" class="card-img"><div class="card-info"><div class="card-title">GTA 4 Mobile</div><div class="stars">★★★★☆</div><button class="download-btn">Download</button></div></div>
-    <div class="card" onclick="openLocker()"><img src="Roblox_Logo_2022.jpg" class="card-img"><div class="card-info"><div class="card-title">Roblox Mod</div><div class="stars">★★★★★</div><button class="download-btn">Download</button></div></div>
     <div class="card" onclick="openLocker()"><img src="spiderman.png" class="card-img"><div class="card-info"><div class="card-title">Spider-Man 2</div><div class="stars">★★★★★</div><button class="download-btn">Download</button></div></div>
     <div class="card" onclick="openLocker()"><img src="rdr2.png" class="card-img"><div class="card-info"><div class="card-title">RDR 2 Cloud</div><div class="stars">★★★★★</div><button class="download-btn">Download</button></div></div>
     <div class="card" onclick="openLocker()"><img src="minecraft.jpeg" class="card-img"><div class="card-info"><div class="card-title">Minecraft PE</div><div class="stars">★★★★★</div><button class="download-btn">Download</button></div></div>
