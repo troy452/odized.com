@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loudplay Tutorial - Odized</title>
+
+  <style>
+    body {
+      background-color: #121212;
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 0;
+      margin: 0;
+    }
+
+    header {
+      background: #1a1a1a;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #333;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+      color: #2ecc71;
+    }
+    .logo span { color: #fff; }
+
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #1e1e1e;
+      border-radius: 10px;
+      border: 1px solid #333;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #00eaff;
+    }
+
+    .locked-box {
+      padding: 20px;
+      text-align: center;
+      border: 1px dashed #00eaff;
+      border-radius: 10px;
+      background: rgba(0, 234, 255, 0.05);
+      margin-bottom: 30px;
+    }
+
+    .unlock-btn {
+      background: transparent;
+      border: 2px solid #2ecc71;
+      padding: 12px 25px;
+      color: #2ecc71;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      margin-top: 10px;
+      transition: 0.3s;
+    }
+    .unlock-btn:hover {
+      background: #2ecc71;
+      color: #000;
+    }
+
+    .tutorial-step {
+      margin: 25px 0;
+      padding: 20px;
+      background: #151515;
+      border-radius: 8px;
+      border: 1px solid #333;
+    }
+
+    .step-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #2ecc71;
+    }
+
+    .download-btn {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      margin-top: 20px;
+      text-align: center;
+      background: #2ecc71;
+      color: #000;
+      font-weight: bold;
+      border-radius: 8px;
+      text-transform: uppercase;
+      font-size: 15px;
+    }
+  </style>
+
+  <script>
+    var locked = true;   // PAGE IS LOCKED UNTIL OGADS OFFER COMPLETED
+    var locker_url = "https://applocked.org/cl/i/gr6w61";
+
+    function unlock() {
+      window.open(locker_url, "_blank");
+    }
+
+    function showContent() {
+      // Usually your OGAds callbacks will redirect to this page only if unlocked
+      // But we create a manual fallback system:
+      locked = false;
+      document.getElementById("locked-box").style.display = "none";
+      document.getElementById("tutorial-content").style.display = "block";
+    }
+  </script>
+
+</head>
+<body>
+
+<header>
+  <div class="logo">ODIZED<span>.COM</span></div>
+</header>
+
+<div class="container">
+
+  <h1>Loudplay – Full Tutorial</h1>
+
+  <!-- LOCKED AREA -->
+  <div id="locked-box" class="locked-box">
+    <p>This tutorial is locked.</p>
+    <p style="color:#888;">Complete one offer to unlock the full guide.</p>
+
+    <button class="unlock-btn" onclick="unlock()">Unlock Tutorial</button>
+
+    <p style="margin-top:10px; font-size:12px; color:#555;">
+      After completing an offer, refresh this page.
+    </p>
+  </div>
+
+  <!-- UNLOCKED CONTENT -->
+  <div id="tutorial-content" style="display:none;">
+
+    <div class="tutorial-step">
+      <div class="step-title">Step 1 — Download Loudplay</div>
+      <p>Click the button below to download Loudplay directly from Google Play Store.</p>
+
+      <a class="download-btn" href="https://play.google.com/store/apps/details?id=io.loudplay.android.app&referrer=utm_source%3Dsite_loudplay_ru%26utm_medium%3Dreferral&pli=1" target="_blank">
+        Download Loudplay
+      </a>
+    </div>
+
+    <div class="tutorial-step">
+      <div class="step-title">Step 2 — Install & Open the App</div>
+      <p>Once installed, launch the Loudplay app and sign in or create a new account.</p>
+    </div>
+
+    <div class="tutorial-step">
+      <div class="step-title">Step 3 — Set Up Your Cloud Gaming Session</div>
+      <p>Press the <strong>Start</strong> button. Loudplay will prepare a cloud gaming PC for you.</p>
+    </div>
+
+    <div class="tutorial-step">
+      <div class="step-title">Step 4 — Install Your Games</div>
+      <p>You will see a Windows desktop. Open:</p>
+      <ul>
+        <li>Steam</li>
+        <li>Epic Games Launcher</li>
+        <li>Any launcher inside the cloud PC</li>
+      </ul>
+      <p>Install any game and start playing!</p>
+    </div>
+
+    <div class="tutorial-step">
+      <div class="step-title">Step 5 — Important Tips</div>
+      <ul>
+        <li>Use fast internet for best performance.</li>
+        <li>Close other apps to reduce lag.</li>
+        <li>If your session stops, restart Loudplay.</li>
+      </ul>
+    </div>
+
+    <br><br>
+    <p style="text-align:center; color:#888;">Enjoy cloud gaming with Odized!</p>
+
+  </div>
+
+</div>
+
+<script>
+  // Auto-unlock demo (you can remove this)
+  // If URL contains ?unlock=1 the tutorial opens
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('unlock') === "1") {
+    showContent();
+  }
+</script>
+
+</body>
+</html>
