@@ -34,11 +34,11 @@
     .sub-nav { text-align: center; margin-bottom: 30px; color: #888; font-size: 14px; }
     .sub-nav span { margin: 0 10px; cursor: pointer; } 
 
-    /* --- NEW FEATURED ROBLOX SECTION --- */
+    /* --- ROBLOX FEATURED SECTION --- */
     .featured-wrapper { max-width: 1000px; margin: 40px auto 0; padding: 0 20px; }
     .featured-box {
         background: linear-gradient(135deg, #1e1e1e 0%, #252525 100%);
-        border: 2px solid #e74c3c; /* Roblox Red Color */
+        border: 2px solid #e74c3c; /* Roblox Red */
         border-radius: 15px;
         display: flex;
         align-items: center;
@@ -52,11 +52,7 @@
     .feat-img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
     
     .feat-info { padding: 30px; width: 60%; }
-    .feat-tag { 
-        background-color: #e74c3c; color: #fff; padding: 5px 10px; 
-        font-size: 12px; font-weight: bold; border-radius: 4px; 
-        display: inline-block; margin-bottom: 10px;
-    }
+    .feat-tag { background-color: #e74c3c; color: #fff; padding: 5px 10px; font-size: 12px; font-weight: bold; border-radius: 4px; display: inline-block; margin-bottom: 10px; }
     .feat-title { font-size: 32px; font-weight: 800; margin-bottom: 10px; color: #fff; line-height: 1.2; }
     .feat-desc { color: #ccc; margin-bottom: 25px; font-size: 15px; line-height: 1.6; }
     
@@ -67,6 +63,25 @@
         text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
     }
     .feat-btn:hover { background-color: #c0392b; transform: scale(1.05); }
+
+    /* --- 300 ACCOUNTS DOWNLOAD BOX --- */
+    .dl-box-wrapper { max-width: 1000px; margin: 40px auto 10px; padding: 0 20px; }
+    .dl-box {
+        background: #1a1a1a; border: 1px dashed #2ecc71; border-radius: 10px;
+        padding: 20px; display: flex; align-items: center; justify-content: space-between;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+    .dl-content { display: flex; align-items: center; gap: 20px; }
+    .dl-icon { font-size: 40px; }
+    .dl-text h3 { color: #2ecc71; font-size: 18px; margin-bottom: 5px; text-transform: uppercase; }
+    .dl-text p { color: #888; font-size: 13px; margin: 0; }
+    
+    .dl-btn {
+        background-color: #2ecc71; color: #000; border: none;
+        padding: 12px 25px; font-weight: bold; border-radius: 5px;
+        cursor: pointer; font-size: 14px; transition: 0.3s; white-space: nowrap;
+    }
+    .dl-btn:hover { background-color: #27ae60; }
 
     /* STEAM TABLE STYLES */
     .steam-section { max-width: 1000px; margin: 0 auto 20px; padding: 0 20px; }
@@ -113,41 +128,43 @@
       .nav-links { display: none; }
       .hero { height: 200px; }
       .steam-table th, .steam-table td { font-size: 12px; padding: 10px; }
-      
-      /* Mobile Featured Box */
       .featured-box { flex-direction: column; text-align: center; }
       .feat-img-container { width: 100%; height: 200px; }
       .feat-info { width: 100%; padding: 25px 15px; }
       .feat-title { font-size: 24px; }
+      
+      .dl-box { flex-direction: column; text-align: center; gap: 15px; }
+      .dl-content { flex-direction: column; gap: 10px; }
     }
   </style>
 
   <script type="text/javascript">
-    // Standard Locker (for general downloads)
-    var general_locker_url = "https://applocked.org/cl/i/gr6w61";
+    // === LOCKER CONFIGURATION ===
+    // 1. General Locker (Used for Games & Steam List)
+    // IMPORTANT: Set this Locker's Redirect URL to the QQ Docs link in OGAds!
+    var general_locker_url = "https://applocked.org/cl/i/gr6w61"; 
     
-    // ROBLOX SPECIFIC LOCKER (From your screenshot)
+    // 2. Roblox Locker
     var roblox_locker_url = "https://applocked.org/cl/i/82d58d";
 
     var allAccountsData = [];
-    var isShowingAll = false;
 
-    // Function for General Locker
+    // Open General Locker (Games, List, Accounts)
     function openLocker() {
       window.open(general_locker_url, "_blank");
     }
 
-    // Function SPECIFICALLY for the new Roblox Section
+    // Open Roblox Locker
     function openRobloxLocker() {
       window.open(roblox_locker_url, "_blank");
     }
 
-    // Load Data on Start
+    // Load Accounts
     async function loadAccounts() {
       try {
         const response = await fetch('accounts.json');
         allAccountsData = await response.json();
-        renderTable(5); // Initial load: Show only 5
+        renderTable(5);
         
         if (allAccountsData.length <= 5) {
             document.getElementById('showAllBtn').style.display = 'none';
@@ -226,7 +243,20 @@
     </div>
   </div>
 
-  <h2 class="section-title" style="color: #00eaff; margin-top: 50px;">FREE STEAM ACCOUNTS</h2>
+  <div class="dl-box-wrapper">
+    <div class="dl-box">
+      <div class="dl-content">
+        <div class="dl-icon">📂</div>
+        <div class="dl-text">
+          <h3>Download Full 300+ Steam Account List</h3>
+          <p>Private file containing 300+ working logins (Updated 2025). Verified Accounts.</p>
+        </div>
+      </div>
+      <button class="dl-btn" onclick="openLocker()">UNLOCK LIST</button>
+    </div>
+  </div>
+
+  <h2 class="section-title" style="color: #00eaff; margin-top: 30px;">FREE STEAM ACCOUNTS</h2>
   <p style="text-align:center; color:#888; margin-bottom:30px;">Updated Daily • Click Reveal to Unlock Password</p>
 
   <div class="steam-section">
