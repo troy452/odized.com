@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Odized - Exclusive Mods & Accounts</title>
+  <title>Odized - Generators & Accounts</title>
   
   <style>
     /* --- STYLES --- */
@@ -32,8 +32,7 @@
     /* SECTIONS */
     .section-title { text-align: center; margin: 50px 0 20px; font-size: 28px; font-weight: 700; color: #fff; }
     .sub-nav { text-align: center; margin-bottom: 30px; color: #888; font-size: 14px; }
-    .sub-nav span { margin: 0 10px; cursor: pointer; } 
-
+    
     /* --- GTA V FEATURED SECTION --- */
     .featured-wrapper { max-width: 1000px; margin: 40px auto 0; padding: 0 20px; }
     .featured-box {
@@ -101,33 +100,35 @@
     .show-all-btn { background-color: #1e1e1e; border: 1px solid #2ecc71; color: #2ecc71; padding: 10px 30px; border-radius: 30px; cursor: pointer; font-weight: bold; transition: 0.3s; }
     .show-all-btn:hover { background-color: #2ecc71; color: #000; }
 
-    /* GAMES GRID */
-    .game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto; padding: 0 20px 50px; }
-    .card { background-color: #1e1e1e; border-radius: 12px; overflow: hidden; transition: transform 0.3s; cursor: pointer; border: 1px solid #333; display: flex; flex-direction: column; position: relative; }
-    .card:hover { transform: translateY(-7px); box-shadow: 0 10px 20px rgba(46, 204, 113, 0.2); border-color: #2ecc71; }
-    .card-img { width: 100%; height: 200px; object-fit: cover; background-color: #000; }
-    .card-info { padding: 15px; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
-    .card-title { font-size: 16px; font-weight: bold; margin-bottom: 5px; color: #fff; }
-    .card-meta { font-size: 11px; color: #888; margin-bottom: 8px; }
-    .stars { color: #f1c40f; margin-bottom: 12px; font-size: 14px; }
-    .download-btn { background-color: #2ecc71; color: #000; border: none; padding: 12px; width: 100%; font-weight: bold; cursor: pointer; border-radius: 6px; text-transform: uppercase; font-size: 13px; transition: background 0.2s; }
-    .download-btn:hover { background-color: #27ae60; }
+    /* GENERATOR GRID STYLES */
+    .game-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto; padding: 0 20px 50px; }
+    
+    .gen-card { 
+        background-color: #1e1e1e; border-radius: 12px; overflow: hidden; 
+        transition: transform 0.3s; cursor: pointer; border: 1px solid #333; 
+        display: flex; flex-direction: column; position: relative;
+    }
+    .gen-card:hover { transform: translateY(-7px); box-shadow: 0 10px 20px rgba(46, 204, 113, 0.2); border-color: #2ecc71; }
+    
+    .gen-img { width: 100%; height: 180px; object-fit: cover; background-color: #000; filter: brightness(0.9); }
+    
+    .gen-info { padding: 20px 15px; text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+    
+    .gen-title { font-size: 18px; font-weight: 800; margin-bottom: 5px; color: #fff; text-transform: uppercase; }
+    .gen-meta { font-size: 12px; color: #2ecc71; margin-bottom: 15px; font-weight: bold; letter-spacing: 0.5px; }
+    
+    .gen-btn { 
+        background-color: #2ecc71; color: #000; border: none; padding: 12px; 
+        width: 100%; font-weight: bold; cursor: pointer; border-radius: 6px; 
+        text-transform: uppercase; font-size: 13px; transition: background 0.2s; 
+    }
+    .gen-btn:hover { background-color: #27ae60; }
 
-    /* --- SPECIAL STYLES FOR TRENDING CARD (GTA V) --- */
-    .card.trending {
-      border: 2px solid #ff0055 !important;
-      box-shadow: 0 0 15px rgba(255, 0, 85, 0.2);
-    }
-    .trending-badge {
-      position: absolute; top: 10px; right: 10px;
-      background: #ff0055; color: white; font-size: 10px; font-weight: bold;
-      padding: 3px 8px; border-radius: 4px; z-index: 5;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.5);
-    }
-    .trending-meta {
-      color: #ff0055 !important;
-      font-weight: bold;
-      font-size: 11px;
+    /* Trending Badge for Grid */
+    .hot-badge {
+        position: absolute; top: 10px; right: 10px;
+        background: #e74c3c; color: white; font-size: 10px; font-weight: bold;
+        padding: 3px 8px; border-radius: 4px; z-index: 5;
     }
 
     footer { background-color: #000; padding: 30px; text-align: center; color: #444; font-size: 12px; }
@@ -148,11 +149,11 @@
 
   <script type="text/javascript">
     // === LOCKER CONFIGURATION ===
-    var general_locker_url = "https://redirectapps.online/cl/i/qnkj87"; 
+    var general_locker_url = "https://applocked.org/cl/i/gr6w61"; 
     
     var allAccountsData = [];
 
-    // Open General Locker (Games, List, Accounts)
+    // Open General Locker (Generators, List, Accounts)
     function openLocker() {
       window.open(general_locker_url, "_blank");
     }
@@ -215,8 +216,8 @@
     <div class="logo">ODIZED<span>.COM</span></div>
     <nav class="nav-links">
       <a href="#">Home</a>
-      <a href="#">Steam Accounts</a>
-      <a href="#">Mobile Games</a>
+      <a href="#">Generators</a>
+      <a href="#">Accounts</a>
     </nav>
     <div class="search-bar">
       <input type="text" placeholder="Search...">
@@ -230,13 +231,13 @@
   <div class="featured-wrapper">
     <div class="featured-box">
         <div class="feat-img-container">
-            <img src="gtav.jpeg" class="feat-img" alt="GTA V Mobile">
+            <img src="gtav.jpeg" class="feat-img" alt="GTA V Generator">
         </div>
         <div class="feat-info">
-            <span class="feat-tag">PREMIUM ACCESS</span>
-            <h2 class="feat-title">GTA V MOBILE + MOD MENU</h2>
-            <p class="feat-desc">The full Grand Theft Auto V experience on mobile. Includes built-in Mod Menu: God Mode, Unlimited Money, All Weapons, and Online Multiplayer support.</p>
-            <button class="feat-btn" onclick="openLocker()">DOWNLOAD NOW</button>
+            <span class="feat-tag">ONLINE GENERATOR</span>
+            <h2 class="feat-title">GTA V ACCOUNT UPGRADE</h2>
+            <p class="feat-desc">Get unlimited Money, RP, and unlock all weapons for your GTA Online account. Safe, free, and undetectable.</p>
+            <button class="feat-btn" onclick="openLocker()">START GENERATOR</button>
         </div>
     </div>
   </div>
@@ -277,65 +278,86 @@
   </div>
 
 
-  <h2 class="section-title">Top 20 Mobile Games & Mods</h2>
-  <div class="sub-nav"><span>Android Games</span> | <span>iOS Games</span></div>
+  <h2 class="section-title">Trending Generators & Currency</h2>
+  <div class="sub-nav"><span>Online Tools</span> | <span>Instant Delivery</span></div>
 
   <div class="game-grid">
     
-    <div class="card trending" onclick="openLocker()">
-      <div class="trending-badge">HOT</div>
-      <img src="gtav.jpeg" class="card-img" alt="GTA V">
-      <div class="card-info">
-        <div class="card-title">GTA V Mobile</div>
-        <div class="card-meta trending-meta">Mod Menu • Unlimited Money • Guns • Online</div>
-        <div class="stars">★★★★★</div>
-        <button class="download-btn">Download</button>
+    <div class="gen-card" onclick="openLocker()">
+      <div class="hot-badge">POPULAR</div>
+      <img src="Roblox_Logo_2022.jpg" class="gen-img" alt="Roblox">
+      <div class="gen-info">
+        <div class="gen-title">Roblox</div>
+        <div class="gen-meta">Free Robux Generator</div>
+        <button class="gen-btn">Generate</button>
       </div>
     </div>
 
-    <div class="card" onclick="openLocker()">
-      <img src="fortnite.jpg" class="card-img" alt="Fortnite">
-      <div class="card-info">
-        <div class="card-title">Fortnite Mobile</div>
-        <div class="card-meta">v32.00 • Battle Royale</div>
-        <div class="stars">★★★★☆</div>
-        <button class="download-btn">Download</button>
+    <div class="gen-card" onclick="openLocker()">
+      <div class="hot-badge">HOT</div>
+      <img src="fortnite.jpg" class="gen-img" alt="Fortnite">
+      <div class="gen-info">
+        <div class="gen-title">Fortnite</div>
+        <div class="gen-meta">Free V-Bucks & Skins</div>
+        <button class="gen-btn">Generate</button>
       </div>
     </div>
 
-    <div class="card" onclick="openLocker()"><img src="gta4.png" class="card-img"><div class="card-info"><div class="card-title">GTA 4 Mobile</div><div class="card-meta">v1.03 • Action</div><div class="stars">★★★★☆</div><button class="download-btn">Download</button></div></div>
+    <div class="gen-card" onclick="openLocker()">
+      <img src="gtav.jpeg" class="gen-img" alt="GTA V">
+      <div class="gen-info">
+        <div class="gen-title">GTA Online</div>
+        <div class="gen-meta">Money & RP Injection</div>
+        <button class="gen-btn">Generate</button>
+      </div>
+    </div>
     
-    <div class="card" onclick="openLocker()"><img src="spiderman.png" class="card-img"><div class="card-info"><div class="card-title">Spider-Man 2</div><div class="card-meta">Mobile Port • Hero</div><div class="stars">★★★★★</div><button class="download-btn">Download</button></div></div>
+    <div class="gen-card" onclick="openLocker()">
+      <div class="hot-badge">NEW</div>
+      <img src="brawl.png" class="gen-img" alt="Brawl Stars">
+      <div class="gen-info">
+        <div class="gen-title">Brawl Stars</div>
+        <div class="gen-meta">Unlimited Gems</div>
+        <button class="gen-btn">Generate</button>
+      </div>
+    </div>
     
-    <div class="card" onclick="openLocker()"><img src="rdr2.png" class="card-img"><div class="card-info"><div class="card-title">RDR 2 Cloud</div><div class="card-meta">Cloud Edition</div><div class="stars">★★★★★</div><button class="download-btn">Download</button></div></div>
+    <div class="gen-card" onclick="openLocker()">
+      <div class="hot-badge">TRENDING</div>
+      <img src="https://via.placeholder.com/300x200/dd3333/ffffff?text=Monopoly+GO" class="gen-img" alt="Monopoly Go">
+      <div class="gen-info">
+        <div class="gen-title">Monopoly GO</div>
+        <div class="gen-meta">Free Dice Rolls</div>
+        <button class="gen-btn">Generate</button>
+      </div>
+    </div>
     
-    <div class="card" onclick="openLocker()"><img src="minecraft.jpeg" class="card-img"><div class="card-info"><div class="card-title">Minecraft PE</div><div class="card-meta">v1.21 • Unlocked</div><div class="stars">★★★★★</div><button class="download-btn">Download</button></div></div>
+    <div class="gen-card" onclick="openLocker()">
+      <img src="cod.png" class="gen-img" alt="COD Mobile">
+      <div class="gen-info">
+        <div class="gen-title">COD Mobile</div>
+        <div class="gen-meta">Free CP Generator</div>
+        <button class="gen-btn">Generate</button>
+      </div>
+    </div>
     
-    <div class="card" onclick="openLocker()"><img src="cod.png" class="card-img"><div class="card-info"><div class="card-title">Warzone Mobile</div><div class="card-meta">CP Generator</div><div class="stars">★★★★☆</div><button class="download-btn">Download</button></div></div>
+    <div class="gen-card" onclick="openLocker()">
+      <img src="freefire.png" class="gen-img" alt="Free Fire">
+      <div class="gen-info">
+        <div class="gen-title">Free Fire</div>
+        <div class="gen-meta">Free Diamonds</div>
+        <button class="gen-btn">Generate</button>
+      </div>
+    </div>
     
-    <div class="card" onclick="openLocker()"><img src="images.png" class="card-img"><div class="card-info"><div class="card-title">FC Mobile 25</div><div class="card-meta">Unlimited Coins</div><div class="stars">★★★★☆</div><button class="download-btn">Download</button></div></div>
-    
-    <div class="card" onclick="openLocker()"><img src="pubg.png" class="card-img"><div class="card-info"><div class="card-title">PUBG Mobile</div><div class="card-meta">UC Hack Tool</div><div class="stars">★★★★★</div><button class="download-btn">Download</button></div></div>
-    
-    <div class="card" onclick="openLocker()"><img src="genshin.png" class="card-img"><div class="card-info"><div class="card-title">Genshin Impact</div><div class="card-meta">Primogem Mod</div><div class="stars">★★★★★</div><button class="download-btn">Download</button></div></div>
-    
-    <div class="card" onclick="openLocker()"><img src="freefire.png" class="card-img"><div class="card-info"><div class="card-title">Free Fire MAX</div><div class="card-meta">Aimbot Menu</div><div class="stars">★★★★☆</div><button class="download-btn">Download</button></div></div>
-    
-    <div class="card" onclick="openLocker()"><img src="brawl.png" class="card-img"><div class="card-info"><div class="card-title">Brawl Stars</div><div class="card-meta">Gem Server</div><div class="stars">★★★★★</div><button class="download-btn">Download</button></div></div>
-    
-    <div class="card" onclick="openLocker()"><img src="nba.png" class="card-img"><div class="card-info"><div class="card-title">NBA 2K25</div><div class="card-meta">Arcade Edition</div><div class="stars">★★★★☆</div><button class="download-btn">Download</button></div></div>
-    
-    <div class="card" onclick="openLocker()"><img src="forza.png" class="card-img"><div class="card-info"><div class="card-title">Forza Horizon 5</div><div class="card-meta">Mobile Port</div><div class="stars">★★★★★</div><button class="download-btn">Download</button></div></div>
-    
-    <div class="card" onclick="openLocker()"><img src="assassin.png" class="card-img"><div class="card-info"><div class="card-title">AC Mirage</div><div class="card-meta">Android/iOS</div><div class="stars">★★★★☆</div><button class="download-btn">Download</button></div></div>
-    
-    <div class="card" onclick="openLocker()"><img src="cyber77.png" class="card-img"><div class="card-info"><div class="card-title">Cyberpunk 2077</div><div class="card-meta">Cloud Stream</div><div class="stars">★★★★★</div><button class="download-btn">Download</button></div></div>
-    
-    <div class="card" onclick="openLocker()"><img src="tlou.jpg" class="card-img"><div class="card-info"><div class="card-title">The Last of Us</div><div class="card-meta">Part 1 Mobile</div><div class="stars">★★★★★</div><button class="download-btn">Download</button></div></div>
-    
-    <div class="card" onclick="openLocker()"><img src="valorent.jpg" class="card-img"><div class="card-info"><div class="card-title">Valorant Mobile</div><div class="card-meta">Beta Access</div><div class="stars">★★★★☆</div><button class="download-btn">Download</button></div></div>
-    
-    <div class="card" onclick="openLocker()"><img src="apex.png" class="card-img"><div class="card-info"><div class="card-title">Apex Legends</div><div class="card-meta">Mobile Rebirth</div><div class="stars">★★★★☆</div><button class="download-btn">Download</button></div></div>
+    <div class="gen-card" onclick="openLocker()">
+      <img src="genshin.png" class="gen-img" alt="Genshin">
+      <div class="gen-info">
+        <div class="gen-title">Genshin Impact</div>
+        <div class="gen-meta">Free Primogems</div>
+        <button class="gen-btn">Generate</button>
+      </div>
+    </div>
 
   </div>
 
